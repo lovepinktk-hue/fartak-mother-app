@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><script>window.__FARTAK_MOTHER_SERVER__="https://fartak-v34.onrender.com";
+/* Optional extra endpoints tried first (e.g. your own Cloudflare custom domain: "https://api.example.com"). */
+window.__FARTAK_MOTHER_SERVERS__=[];</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#070b14"><title>فرتاک | اپ مادر (مدیریت)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>:root{--bg:#070b14;--panel:#0f172a;--panel2:#111c33;--line:#1e293b;--line2:#334155;--tx:#e2e8f0;--mut:#94a3b8;--dim:#64748b;--em:#10b981;--em2:#34d399;--am:#f59e0b;--ro:#f43f5e;--cy:#22d3ee;--pu:#a78bfa}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,system-ui,sans-serif;font-size:14px;direction:rtl}
+button,input,select,textarea{font-family:inherit;font-size:13px;color:var(--tx)}
+a{color:var(--cy)}
+#app{min-height:100vh;display:flex;flex-direction:column}
+header.top{position:sticky;top:0;z-index:30;background:rgba(7,11,20,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(16,185,129,.3);padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#059669,#14b8a6,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:900;color:#022c22;font-size:18px;flex:none}
+.top h1{margin:0;font-size:15px;font-weight:800}.top small{color:var(--mut);font-size:11px;display:block}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid}
+.pill.ok{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.4);color:var(--em2)}
+.pill.bad{background:rgba(244,63,94,.12);border-color:rgba(244,63,94,.4);color:#fb7185}
+.pill.warn{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.4);color:#fbbf24}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+.spacer{flex:1}
+.target{display:flex;align-items:center;gap:6px}
+.target select{max-width:210px}
+.layout{display:flex;flex:1;min-height:0}
+nav.side{width:218px;flex:none;border-left:1px solid var(--line);padding:10px 8px;position:sticky;top:60px;align-self:flex-start;height:calc(100vh - 60px);overflow:auto;background:rgba(15,23,42,.5)}
+nav.side button{display:flex;align-items:center;gap:8px;width:100%;text-align:right;background:none;border:0;color:var(--mut);padding:9px 10px;border-radius:10px;cursor:pointer;font-weight:600;margin-bottom:2px}
+nav.side button:hover{background:#111c33;color:var(--tx)}
+nav.side button.on{background:rgba(16,185,129,.16);color:var(--em2)}
+nav.side .grp{font-size:10px;color:var(--dim);margin:10px 10px 4px;font-weight:700}
+main{flex:1;min-width:0;padding:14px;padding-bottom:90px;max-width:1100px;margin:0 auto;width:100%}
+@media(max-width:820px){nav.side{position:fixed;bottom:0;top:auto;right:0;left:0;width:auto;height:auto;display:flex;overflow-x:auto;border:0;border-top:1px solid var(--line);z-index:40;background:rgba(7,11,20,.97);padding:6px;gap:4px}
+nav.side button{flex:none;width:auto;flex-direction:column;gap:2px;font-size:10px;padding:6px 10px;margin:0;white-space:nowrap}nav.side .grp{display:none}main{padding-bottom:110px}}
+h2.pg{font-size:17px;margin:4px 0 12px;font-weight:800;display:flex;align-items:center;gap:8px}
+h3.sec{font-size:13px;margin:0 0 10px;font-weight:800;color:var(--em2);display:flex;align-items:center;gap:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px}
+.card.sub{background:var(--panel2);border-radius:14px;padding:10px;margin-bottom:8px}
+.grid{display:grid;gap:10px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.g2,.g3,.g4{grid-template-columns:1fr}.g2.keep,.g4.keep{grid-template-columns:repeat(2,1fr)}}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f>label,.lab{font-size:11px;color:var(--mut);font-weight:600}
+.f .hint{font-size:10px;color:var(--dim);line-height:1.6}
+input[type=text],input[type=number],input[type=password],input[type=url],input[type=search],select,textarea{width:100%;background:#0b1224;border:1px solid var(--line2);border-radius:11px;padding:9px 11px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--em)}
+textarea{resize:vertical;min-height:70px;line-height:1.8}
+input[type=color]{width:100%;height:38px;background:#0b1224;border:1px solid var(--line2);border-radius:11px;padding:3px}
+.ltr{direction:ltr;text-align:left;font-family:'JetBrains Mono',ui-monospace,monospace}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0b1224;border:1px solid var(--line2);border-radius:11px;padding:8px 11px;cursor:pointer}
+.sw span{font-size:12px;color:var(--tx)}
+.sw input{display:none}
+.sw i{width:38px;height:22px;border-radius:999px;background:#334155;position:relative;flex:none;transition:.2s}
+.sw i:after{content:"";position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+i{background:var(--em)}.sw input:checked+i:after{right:19px}
+.btn{border:0;border-radius:11px;padding:9px 14px;font-weight:800;cursor:pointer;background:#1e293b;color:var(--tx);display:inline-flex;align-items:center;gap:6px;justify-content:center}
+.btn:hover{filter:brightness(1.15)}.btn:disabled{opacity:.5;cursor:default}
+.btn.p{background:linear-gradient(135deg,#10b981,#14b8a6);color:#022c22}.btn.a{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#2b1700}
+.btn.d{background:rgba(244,63,94,.15);color:#fb7185;border:1px solid rgba(244,63,94,.35)}.btn.s{padding:5px 9px;font-size:11px;border-radius:9px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row.sp{justify-content:space-between}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px}
+.stat .k{font-size:11px;color:var(--mut)}.stat .v{font-size:20px;font-weight:900;margin-top:3px}.stat .s{font-size:10px;color:var(--dim);margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line);vertical-align:middle}th{color:var(--mut);font-size:11px;font-weight:700}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+.chip{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:800;background:#1e293b;color:var(--mut)}
+.chip.g{background:rgba(16,185,129,.18);color:var(--em2)}.chip.r{background:rgba(244,63,94,.18);color:#fb7185}.chip.y{background:rgba(245,158,11,.18);color:#fbbf24}.chip.b{background:rgba(34,211,238,.15);color:var(--cy)}
+.note{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);color:#fcd34d;border-radius:12px;padding:9px 12px;font-size:12px;line-height:1.8;margin-bottom:10px}
+.note.info{background:rgba(34,211,238,.07);border-color:rgba(34,211,238,.3);color:#67e8f9}
+.note.ok{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);color:var(--em2)}
+.note.bad{background:rgba(244,63,94,.08);border-color:rgba(244,63,94,.3);color:#fda4af}
+code,.code{background:#0b1224;border:1px solid var(--line2);border-radius:8px;padding:2px 6px;direction:ltr;display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;word-break:break-all}
+pre.code{display:block;padding:10px;white-space:pre-wrap;text-align:left;line-height:1.7;margin:6px 0}
+.savebar{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);z-index:60;background:#052e22;border:1px solid var(--em);border-radius:16px;padding:8px 10px;display:none;gap:8px;align-items:center;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.savebar.on{display:flex}
+@media(min-width:821px){.savebar{bottom:20px}}
+#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:99;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}
+#toast div{background:#0f172a;border:1px solid var(--em);color:var(--em2);padding:9px 14px;border-radius:12px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.6);max-width:92vw}
+#toast div.e{border-color:var(--ro);color:#fb7185}
+.modal{position:fixed;inset:0;z-index:90;background:rgba(2,6,23,.94);display:flex;align-items:center;justify-content:center;padding:14px}
+.modal .box{background:var(--panel);border:1px solid var(--line2);border-radius:22px;padding:18px;width:100%;max-width:440px;max-height:92vh;overflow:auto}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.tabs button{border:1px solid var(--line2);background:#0b1224;color:var(--mut);border-radius:10px;padding:7px 12px;font-weight:700;cursor:pointer}.tabs button.on{background:rgba(16,185,129,.18);border-color:var(--em);color:var(--em2)}
+.item-h{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px}
+.sw-grad{height:22px;border-radius:8px}
+.empty{color:var(--dim);text-align:center;padding:18px;font-size:12px}
+.mini{font-size:11px;color:var(--mut)}
+.kv{display:flex;gap:6px;margin-bottom:6px}.kv input{flex:1}
+</style></head><body><div id="app"></div>
+<script>/* ===== Fartak Mother App — core ===== */
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fa = (n) => (n === undefined || n === null || n === '' || isNaN(n) ? '—' : Number(n).toLocaleString('fa-IR'));
+const when = (t) => (t ? new Date(t).toLocaleString('fa-IR', { dateStyle: 'short', timeStyle: 'short' }) : '—');
+const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
+const clone = (v) => (v === undefined ? undefined : JSON.parse(JSON.stringify(v)));
+const uid = (p) => p + Math.random().toString(36).slice(2, 8);
+const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } };
+
+/* ---------- servers (VPS profiles) ---------- */
+const FIXED_SERVER_URL = String(window.__FARTAK_MOTHER_SERVER__ || 'https://fartak-v34.onrender.com').replace(/\/+$/, '');
+const SRV = {
+  list: [{ name: 'سرور مرکزی فرتاک', url: FIXED_SERVER_URL, pointer: FIXED_SERVER_URL, key: lsGet('fm_admin_token', ''), remember: true }], cur: 0,
+  get now() { return this.list[0] || null; },
+  save() { if (!this.list[0]) this.list[0] = { name: 'سرور مرکزی فرتاک', url: FIXED_SERVER_URL, pointer: FIXED_SERVER_URL, key: '', remember: true }; this.list[0].name = 'سرور مرکزی فرتاک'; this.list[0].url = FIXED_SERVER_URL; this.list[0].pointer = FIXED_SERVER_URL; this.list[0].remember = true; lsSet('fm_admin_token', this.list[0].key || ''); lsSet('fm_servers', this.list.map(x => ({ name: x.name, url: FIXED_SERVER_URL, pointer: FIXED_SERVER_URL, key: x.key || '', remember: true }))); lsSet('fm_cur', 0); },
+};
+const normUrl = (u) => { u = String(u || '').trim(); if (!u) return ''; if (!/^https?:\/\//i.test(u)) u = 'https://' + u; return u.replace(/\/+$/, ''); };
+
+/* Several central endpoints may be listed in window.__FARTAK_MOTHER_SERVERS__ (e.g. a custom Cloudflare domain first,
+   workers.dev second). Requests use the last working one and fail over automatically on network errors/timeouts. */
+const SERVER_URLS = [...new Set([].concat(window.__FARTAK_MOTHER_SERVERS__ || [], FIXED_SERVER_URL).map(normUrl).filter((u) => /^https:\/\//i.test(u)))];
+let activeSrv = Math.max(0, SERVER_URLS.indexOf(lsGet('fm_active_server', '')));
+async function resolvePointer(s) { return s; }
+async function fetchAny(path, init, ms) {
+  const urls = SERVER_URLS.length ? SERVER_URLS : [FIXED_SERVER_URL]; let lastErr = null, lastResp = null;
+  for (let k = 0; k < urls.length; k++) {
+    const i = (activeSrv + k) % urls.length, ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
+    try {
+      const r = await fetch(urls[i] + path, { ...init, signal: ctl.signal }); clearTimeout(t);
+      if ((r.status >= 502 && r.status <= 504) || (r.status >= 520 && r.status <= 530)) { lastResp = r; continue; }
+      if (i !== activeSrv) { activeSrv = i; lsSet('fm_active_server', urls[i]); }
+      return r;
+    } catch (e) { clearTimeout(t); lastErr = e; }
+  }
+  if (lastResp) return lastResp;
+  throw lastErr || new TypeError('Failed to fetch');
+}
+/* ---------- API ---------- */
+async function api(method, path, body, opts = {}) {
+  const s = opts.server || SRV.now;
+  if (!s) throw new Error('سرور تنظیم نشده است');
+  try {
+    const headers = { 'content-type': 'application/json' }; if (s.key) headers.authorization = 'Bearer ' + s.key;
+    const r = await fetchAny(path, { method, headers, cache: 'no-store', body: body === undefined ? undefined : JSON.stringify(body) }, opts.timeout || 20000);
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 401 && !opts.quiet) { S.auth = false; renderAll(); }
+    if (!r.ok || j.success === false) { const e = new Error(j.error || 'خطا ' + r.status); e.status = r.status; e.data = j; throw e; }
+    return j;
+  } catch (e) {
+    if (e.status) throw e;
+    const ne = new Error(e.name === 'AbortError' ? 'پاسخی از سرور نیامد (timeout)؛ اینترنت یا فیلترشکن را بررسی کنید.' : 'اتصال به سرور برقرار نشد؛ اینترنت یا فیلترشکن را بررسی کنید و دوباره تلاش کنید.');
+    ne.network = true; throw ne;
+  }
+}
+
+/* ---------- state ---------- */
+const S = {
+  auth: false, page: lsGet('fm_page', 'dash'), target: 'global', cfg: null, loaded: null, global: null, overrides: {},
+  dirty: false, apps: [], groups: [], online: 0, serverInfo: null, cache: {},
+};
+const PAGES = [
+  ['dash', '📊', 'داشبورد', ''], ['apps', '📱', 'اپ‌های متصل', 'مدیریت'], ['server', '☁️', 'سرور و اتصال', 'مدیریت'],
+  ['brand', '🎨', 'برند و ظاهر', 'ظاهر اپ عمومی'], ['sections', '🧩', 'بخش‌ها و تب‌ها', 'ظاهر اپ عمومی'], ['banners', '📣', 'اعلان و بنر', 'ظاهر اپ عمومی'],
+  ['symbols', '💹', 'نمادها و قیمت', 'بازار'], ['news', '📰', 'خبر و سشن', 'بازار'], ['chart', '📈', 'چارت', 'بازار'], ['indicator', '🎯', 'اندیکاتور فرتاک', 'بازار'],
+  ['signals', '⚡', 'سیگنال‌ها', 'معامله'], ['sigset', '🛡️', 'حد سود و ضرر', 'معامله'], ['journal', '📒', 'ژورنال', 'معامله'],
+  ['ai', '🤖', 'هوش مصنوعی', 'هوش مصنوعی'], ['plans', '💳', 'اشتراک و پرداخت', 'مالی'], ['users', '👥', 'کاربران و کیف پول', 'مالی'], ['economy', '🎡', 'توکن و گردونه', 'مالی'],
+  ['security', '🔐', 'امنیت و پشتیبان', 'سیستم'],
+];
+
+function toast(msg, err) {
+  let t = $('#toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; document.body.appendChild(t); }
+  const d = document.createElement('div'); if (err) d.className = 'e'; d.textContent = msg; t.appendChild(d);
+  setTimeout(() => d.remove(), err ? 6000 : 3200);
+}
+const copy = (txt) => { try { navigator.clipboard.writeText(txt).then(() => toast('کپی شد ✓')); } catch { const a = document.createElement('textarea'); a.value = txt; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); toast('کپی شد ✓'); } };
+
+/* ---------- config get/set + diff ---------- */
+const getP = (p) => p.split('.').reduce((o, k) => (o == null ? undefined : o[k]), S.cfg);
+function setP(p, val) {
+  const ks = p.split('.'); let o = S.cfg;
+  for (let i = 0; i < ks.length - 1; i++) { if (o[ks[i]] == null || typeof o[ks[i]] !== 'object') o[ks[i]] = /^\d+$/.test(ks[i + 1]) ? [] : {}; o = o[ks[i]]; }
+  o[ks[ks.length - 1]] = val; markDirty();
+}
+function diff(a, b) {
+  if (isObj(a) && isObj(b)) {
+    const p = {};
+    for (const k of Object.keys(b)) { if (!(k in a)) p[k] = b[k]; else { const d = diff(a[k], b[k]); if (d !== undefined) p[k] = d; } }
+    for (const k of Object.keys(a)) if (!(k in b)) p[k] = null;
+    return Object.keys(p).length ? p : undefined;
+  }
+  return JSON.stringify(a) === JSON.stringify(b) ? undefined : b;
+}
+function markDirty() { const d = diff(S.loaded, S.cfg); S.dirty = d !== undefined; const b = $('#savebar'); if (b) b.classList.toggle('on', S.dirty); }
+
+async function loadConfig() {
+  const r = await api('GET', '/api/mother/config/full?target=' + encodeURIComponent(S.target));
+  S.global = r.global; S.overrides = r.overrides; S.cfg = clone(r.effective); S.loaded = clone(r.effective); S.dirty = false; markDirty();
+}
+async function saveConfig() {
+  const patch = diff(S.loaded, S.cfg); if (!patch) return;
+  const b = $('#btnSave'); if (b) b.disabled = true;
+  try { await api('POST', '/api/mother/config', { target: S.target, patch }); await loadConfig(); toast('ذخیره شد و روی اپ‌ها اعمال می‌شود ✓'); renderPage(); }
+  catch (e) { toast(e.message, true); } finally { if (b) b.disabled = false; }
+}
+function discard() { S.cfg = clone(S.loaded); markDirty(); renderPage(); }
+
+/* ---------- form builders (bound to config paths) ---------- */
+const attrs = (p, t, extra = '') => `data-p="${esc(p)}" data-t="${t}" ${extra}`;
+function F(p, label, type = 'text', o = {}) {
+  const v = getP(p);
+  const hint = o.hint ? `<span class="hint">${o.hint}</span>` : '';
+  const dir = o.ltr ? ' ltr' : '';
+  const re = o.re ? 'data-re="1"' : '';
+  if (type === 'switch') return `<label class="sw"><span>${label}</span><input type="checkbox" ${attrs(p, 'bool', re)} ${v ? 'checked' : ''}><i></i></label>`;
+  if (type === 'textarea') return `<div class="f"><label>${label}</label><textarea ${attrs(p, 'text')} rows="${o.rows || 3}" placeholder="${esc(o.ph || '')}">${esc(v)}</textarea>${hint}</div>`;
+  if (type === 'number') return `<div class="f"><label>${label}</label><input type="number" inputmode="decimal" step="${o.step || 'any'}" ${o.min !== undefined ? `min="${o.min}"` : ''} ${o.max !== undefined ? `max="${o.max}"` : ''} ${attrs(p, 'num')} value="${esc(v ?? '')}">${hint}</div>`;
+  if (type === 'select') return `<div class="f"><label>${label}</label><select ${attrs(p, 'text', re)}>${o.options.map((x) => { const [val, lb] = Array.isArray(x) ? x : [x, x]; return `<option value="${esc(val)}" ${String(v) === String(val) ? 'selected' : ''}>${esc(lb)}</option>`; }).join('')}</select>${hint}</div>`;
+  if (type === 'color') return `<div class="f"><label>${label}</label><input type="color" ${attrs(p, 'text')} value="${esc(v || o.def || '#10b981')}">${hint}</div>`;
+  if (type === 'tags') return `<div class="f"><label>${label}</label><input type="text" class="ltr" ${attrs(p, 'tags')} value="${esc((v || []).join(', '))}" placeholder="${esc(o.ph || '')}">${hint}</div>`;
+  if (type === 'numtags') return `<div class="f"><label>${label}</label><input type="text" class="ltr" ${attrs(p, 'numtags')} value="${esc((v || []).join(', '))}">${hint}</div>`;
+  return `<div class="f"><label>${label}</label><input type="${type === 'password' ? 'password' : 'text'}" class="${dir.trim()}" ${attrs(p, 'text', re)} value="${esc(v ?? '')}" placeholder="${esc(o.ph || '')}" ${o.list ? `list="${o.list}"` : ''}>${hint}</div>`;
+}
+
+/** Editable array of objects. fields: [{k,label,type,opts,w}] */
+function L(p, title, fields, newItem, o = {}) {
+  const arr = getP(p) || [];
+  const items = arr.map((it, i) => `<div class="card sub"><div class="item-h"><b class="mini">${esc(o.itemTitle ? o.itemTitle(it, i) : title + ' ' + fa(i + 1))}</b><span class="row">
+    ${o.move === false ? '' : `<button class="btn s" data-act="mv" data-p="${p}" data-i="${i}" data-d="-1">▲</button><button class="btn s" data-act="mv" data-p="${p}" data-i="${i}" data-d="1">▼</button>`}
+    ${o.noRemove ? '' : `<button class="btn s d" data-act="rm" data-p="${p}" data-i="${i}">حذف</button>`}</span></div>
+    <div class="grid ${o.cols || 'g2'}">${fields.map((f) => `<div style="${f.full ? 'grid-column:1/-1' : ''}">${F(`${p}.${i}.${f.k}`, f.label, f.type || 'text', f.opts || {})}</div>`).join('')}</div></div>`).join('');
+  return `<div>${items || '<div class="empty">موردی ثبت نشده</div>'}<button class="btn s p" data-act="add" data-p="${p}" data-new='${esc(JSON.stringify(newItem))}'>＋ افزودن ${esc(o.addLabel || title)}</button></div>`;
+}
+
+/** key→value editor for objects of strings */
+function KV(p, kl = 'متن اصلی', vl = 'جایگزین') {
+  const o = getP(p) || {};
+  const rows = Object.entries(o).map(([k, v], i) => `<div class="kv"><input type="text" data-kv="${p}" data-kvi="${i}" data-kvf="k" value="${esc(k)}" placeholder="${kl}"><input type="text" data-kv="${p}" data-kvi="${i}" data-kvf="v" value="${esc(v)}" placeholder="${vl}"><button class="btn s d" data-act="kvrm" data-p="${p}" data-kvi="${i}">✕</button></div>`).join('');
+  return `${rows || '<div class="empty">موردی نیست</div>'}<button class="btn s p" data-act="kvadd" data-p="${p}">＋ افزودن</button>`;
+}
+
+/* ---------- global event delegation ---------- */
+document.addEventListener('input', onField); document.addEventListener('change', onField);
+function onField(e) {
+  const el = e.target;
+  if (el.dataset?.kv) { // key/value rows
+    const o = getP(el.dataset.kv) || {}; const entries = Object.entries(o); const i = +el.dataset.kvi;
+    if (entries[i]) { if (el.dataset.kvf === 'k') entries[i][0] = el.value; else entries[i][1] = el.value; setP(el.dataset.kv, Object.fromEntries(entries)); }
+    return;
+  }
+  if (!el.dataset?.p || !el.dataset.t || el.dataset.local) return;
+  if (e.type === 'input' && (el.type === 'checkbox' || el.tagName === 'SELECT' || el.type === 'color')) { if (el.type === 'color') { setP(el.dataset.p, el.value); } return; }
+  const t = el.dataset.t; let v;
+  if (t === 'bool') v = el.checked; else if (t === 'num') v = el.value === '' ? 0 : parseFloat(el.value);
+  else if (t === 'tags') v = el.value.split(/[,،\n]/).map((x) => x.trim()).filter(Boolean);
+  else if (t === 'numtags') v = el.value.split(/[,،\s]+/).map((x) => parseFloat(x)).filter((x) => !isNaN(x));
+  else v = el.value;
+  setP(el.dataset.p, v);
+  if (el.dataset.re) renderPage();
+}
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const a = b.dataset.act, p = b.dataset.p, i = +b.dataset.i;
+  if (a === 'add') { const arr = getP(p) || []; arr.push(JSON.parse(b.dataset.new.replace(/__ID__/g, uid('x')))); setP(p, arr); renderPage(); }
+  else if (a === 'rm') { if (!confirm('حذف شود؟')) return; const arr = getP(p); arr.splice(i, 1); setP(p, arr); renderPage(); }
+  else if (a === 'mv') { const arr = getP(p), d = +b.dataset.d; const j = i + d; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; setP(p, arr); renderPage(); }
+  else if (a === 'kvadd') { const o = getP(p) || {}; let k = 'متن جدید'; let n = 1; while (k in o) k = 'متن جدید ' + ++n; o[k] = ''; setP(p, o); renderPage(); }
+  else if (a === 'kvrm') { const o = getP(p) || {}; const ks = Object.keys(o); delete o[ks[+b.dataset.kvi]]; setP(p, o); renderPage(); }
+  else if (a === 'copy') copy(b.dataset.v);
+  else if (ACT[a]) { try { b.disabled = true; await ACT[a](b, e); } catch (er) { toast(er.message || String(er), true); } finally { b.disabled = false; } }
+});
+const ACT = {}; // page-specific actions get registered here
+
+/* ---------- shell ---------- */
+function shell() {
+  const tgtOpts = [`<option value="global">🌐 همه اپ‌ها (سراسری)</option>`]
+    .concat(S.groups.map((g) => `<option value="group:${esc(g.name)}">👥 گروه: ${esc(g.name)}</option>`))
+    .concat(S.apps.slice(0, 200).map((a) => `<option value="app:${esc(a.id)}">📱 ${esc(a.name || a.reportedName || a.id)}${a.online ? ' ●' : ''}</option>`)).join('');
+  const groups = []; PAGES.forEach((p) => { if (!groups.includes(p[3])) groups.push(p[3]); });
+  const nav = groups.map((g) => `${g ? `<div class="grp">${esc(g)}</div>` : ''}${PAGES.filter((p) => p[3] === g).map((p) => `<button data-nav="${p[0]}" class="${S.page === p[0] ? 'on' : ''}"><span>${p[1]}</span>${esc(p[2])}</button>`).join('')}`).join('');
+  return `<header class="top"><div class="logo">ف</div><div><h1>اپ مادر فرتاک</h1><small>کنترل کامل تمام اپ‌های عمومی</small></div>
+    <span class="pill ${S.online >= 0 ? 'ok' : 'bad'}" id="pillSrv"><span class="dot"></span>${esc(SRV.now?.name || 'سرور')} · ${fa(S.online)} اپ آنلاین</span><div class="spacer"></div>
+    <div class="target"><span class="mini">ویرایش برای:</span><select id="target">${tgtOpts}</select></div></header>
+    <div class="layout"><nav class="side">${nav}</nav><main id="view"></main></div>
+    <div class="savebar" id="savebar"><span class="mini" style="color:#a7f3d0">تغییرات ذخیره‌نشده</span><button class="btn p s" id="btnSave">💾 ذخیره و اعمال</button><button class="btn s" id="btnDiscard">لغو</button></div>`;
+}
+
+function targetBanner() {
+  if (S.target === 'global') return '';
+  const n = Object.keys(S.overrides || {}).length;
+  return `<div class="note info">در حال ویرایش تنظیمات <b>اختصاصی ${S.target.startsWith('app:') ? 'یک اپ' : 'یک گروه'}</b> هستید؛ تغییرات فقط برای همین ${S.target.startsWith('app:') ? 'اپ' : 'گروه'} اعمال می‌شود و بقیه از تنظیمات سراسری پیروی می‌کنند. (${fa(n)} بخش اختصاصی دارد)
+    <button class="btn s d" data-act="resetTarget" style="margin-right:8px">بازنشانی به تنظیمات سراسری</button></div>`;
+}
+ACT.resetTarget = async () => { if (!confirm('همه تنظیمات اختصاصی این مورد پاک شود؟')) return; await api('POST', '/api/mother/config/reset', { target: S.target }); await loadConfig(); renderPage(); toast('بازنشانی شد'); };
+
+async function refreshMeta() {
+  try { const r = await api('GET', '/api/mother/apps', undefined, { quiet: true }); S.apps = r.apps; S.groups = r.groups; S.online = r.online; } catch { S.online = -1; }
+}
+
+function renderAll() {
+  const root = $('#app');
+  if (!SRV.now || !SRV.now.url) { root.innerHTML = ''; return noServerPage(); }
+  if (!S.auth) { root.innerHTML = ''; return connectScreen(); }
+  root.innerHTML = shell();
+  $('#target').value = S.target;
+  $('#target').onchange = async (e) => { if (S.dirty && !confirm('تغییرات ذخیره‌نشده از بین می‌رود. ادامه؟')) { e.target.value = S.target; return; } S.target = e.target.value; await loadConfig(); renderPage(); };
+  document.querySelectorAll('[data-nav]').forEach((b) => (b.onclick = () => goto(b.dataset.nav)));
+  $('#btnSave').onclick = saveConfig; $('#btnDiscard').onclick = discard;
+  renderPage();
+}
+function goto(p) { S.page = p; lsSet('fm_page', p); document.querySelectorAll('[data-nav]').forEach((b) => b.classList.toggle('on', b.dataset.nav === p)); renderPage(); window.scrollTo(0, 0); }
+async function renderPage() {
+  const v = $('#view'); if (!v) return;
+  const P = PG[S.page] || PG.dash;
+  const pg = PAGES.find((x) => x[0] === S.page);
+  v.innerHTML = `<h2 class="pg"><span>${pg[1]}</span>${esc(pg[2])}</h2>` + (P.cfg ? targetBanner() : '') + '<div id="pgbody"><div class="empty">در حال بارگذاری…</div></div>';
+  try { const html = await P.render(); const b = $('#pgbody'); if (b && S.page === pg[0]) { b.innerHTML = html; P.after?.(); } } catch (e) { const b = $('#pgbody'); if (b) b.innerHTML = `<div class="note bad">${esc(e.message)}</div>`; }
+  markDirty();
+}
+const PG = {}; // pages register here
+
+/* ---------- login: only the admin password (server address lives in Settings > Server) ---------- */
+async function loginScreen() {
+  const old = document.getElementById('conn'); if (old) old.remove();
+  const m = document.createElement('div'); m.className = 'modal'; m.id = 'conn'; document.body.appendChild(m);
+  const st = (t, bad) => { const el = m.querySelector('#c_s'); if (el) { el.style.color = bad ? '#fb7185' : '#34d399'; el.textContent = t; } };
+  const codePanel = (code, heading, after) => {
+    m.querySelector('.box').innerHTML = `<div class="row" style="margin-bottom:10px"><div class="logo">ف</div><div><b>${heading}</b><div class="mini">این کد فقط همین یک بار نمایش داده می‌شود. آن را در جای امن نگه دار.</div></div></div><div class="note ok" style="direction:ltr;text-align:center;overflow-wrap:anywhere;font-weight:800;font-size:17px;padding:14px" id="c_recovery"></div><div id="c_s" class="mini" style="margin:10px 0"></div><div class="row"><button class="btn" id="c_copy">کپی کد</button><button class="btn p" id="c_continue">${after === 'boot' ? 'کد را ذخیره کردم؛ ورود به پنل' : 'کد را ذخیره کردم؛ بازگشت به ورود'}</button></div>`;
+    m.querySelector('#c_recovery').textContent = code;
+    m.querySelector('#c_copy').onclick = async () => { try { await navigator.clipboard.writeText(code); st('کد بازیابی کپی شد؛ آن را بیرون از برنامه نیز ذخیره کن.'); } catch { st('کد را به‌صورت دستی کپی و در جای امن ذخیره کن.', true); } };
+    m.querySelector('#c_continue').onclick = () => { m.remove(); if (after === 'boot') boot(); else loginScreen(); };
+  };
+  const renderError = (msg) => {
+    m.innerHTML = `<div class="box"><div class="logo" style="margin-bottom:10px">ف</div><h3>اتصال به سرور مرکزی</h3><p class="mini" style="line-height:2">آدرس Cloudflare به‌صورت خودکار تنظیم شده است؛ نیازی به وارد کردن آدرس یا کلید سرور نیست.</p><div id="c_s" class="mini" style="color:#fb7185;margin:10px 0"></div><button class="btn p" id="c_retry">تلاش مجدد</button></div>`;
+    st(msg || 'اتصال به سرور برقرار نشد.', true); m.querySelector('#c_retry').onclick = () => loginScreen();
+  };
+  let status;
+  try { status = await api('GET', '/api/mother/auth/status', undefined, { quiet: true, timeout: 12000 }); }
+  catch (e) {
+    const notDeployed = e.status === 404 || /not found|یافت نشد/i.test(e.message || '');
+    renderError(notDeployed
+      ? 'کد API فرتاک هنوز روی Worker این آدرس منتشر نشده است. Worker فعلی مسیر /api/mother/auth/status را نمی‌شناسد؛ ابتدا پروژه fartak-config-worker را در پوشه پروژه Wrangler کپی و پس از آزمایش منتشر کن.'
+      : 'سرور مرکزی در دسترس نیست: ' + (e.message || 'خطای اتصال'));
+    return;
+  }
+  const setup = !!status.setupRequired;
+  const loginMarkup = `<div class="row" style="margin-bottom:10px"><div class="logo">ف</div><div><b style="font-size:16px">ورود مدیر فرتاک</b><div class="mini">اتصال خودکار به سرور فرتاک · ${esc(FIXED_SERVER_URL)}</div></div></div><div class="f"><label>نام کاربری مدیر</label><input id="c_u" autocomplete="username" autocapitalize="off" spellcheck="false" autofocus></div><div class="f"><label>رمز عبور</label><input type="password" class="ltr" id="c_k" autocomplete="current-password"></div><label class="mini" style="display:flex;gap:6px;align-items:center;margin:6px 0"><input type="checkbox" id="c_r" checked> مرا در این دستگاه به خاطر بسپار</label><div id="c_s" class="mini" style="margin:8px 0"></div><div class="row"><button class="btn p" id="c_go">ورود</button><button class="btn" id="c_forgot">بازیابی رمز</button></div>`;
+  const setupMarkup = `<div class="row" style="margin-bottom:10px"><div class="logo">ف</div><div><b style="font-size:16px">ثبت اولیه مدیر فرتاک</b><div class="mini">این فرم فقط برای اولین راه‌اندازی نمایش داده می‌شود.</div></div></div><div class="f"><label>نام کاربری مدیر (انگلیسی)</label><input id="c_u" autocomplete="username" autocapitalize="off" spellcheck="false" autofocus></div><div class="f"><label>رمز عبور (حداقل ۱۰ نویسه)</label><input type="password" class="ltr" id="c_k" autocomplete="new-password"></div><div class="f"><label>تکرار رمز عبور</label><input type="password" class="ltr" id="c_k2" autocomplete="new-password"></div><div id="c_s" class="mini" style="margin:8px 0"></div><button class="btn p" id="c_setup">ثبت حساب مدیر</button>`;
+  m.innerHTML = `<div class="box">${setup ? setupMarkup : loginMarkup}</div>`;
+  if (setup) {
+    const go = async () => {
+      const username = m.querySelector('#c_u').value.trim(), password = m.querySelector('#c_k').value, confirmPassword = m.querySelector('#c_k2').value;
+      if (!username || password.length < 10) return st('نام کاربری را وارد کن و رمز حداقل ۱۰ نویسه‌ای بساز.', true);
+      if (password !== confirmPassword) return st('رمز عبور و تکرار آن یکسان نیستند.', true);
+      st('در حال ثبت حساب مدیر…');
+      try { const r = await api('POST','/api/mother/auth/setup',{username,password},{quiet:true,timeout:15000}); SRV.now.key = r.token; SRV.save(); codePanel(r.recoveryCode,'حساب مدیر ساخته شد؛ کد بازیابی را ذخیره کن','boot'); }
+      catch (e) { st(e.message || 'ثبت حساب ناموفق بود.', true); }
+    };
+    m.querySelector('#c_setup').onclick = go; m.querySelector('#c_k2').addEventListener('keydown',e=>{if(e.key==='Enter')go();}); m.querySelector('#c_u').focus();
+  } else {
+    const go = async () => {
+      const username=m.querySelector('#c_u').value.trim(), password=m.querySelector('#c_k').value;
+      if (!username || !password) return st('نام کاربری و رمز عبور را وارد کن.',true);
+      st('در حال ورود…');
+      try { const r=await api('POST','/api/mother/auth/login',{username,password,remember:m.querySelector('#c_r').checked},{quiet:true,timeout:15000}); SRV.now.key=r.token; SRV.save(); S.auth=true; S.target='global'; m.remove(); await boot(); }
+      catch(e) { st(e.status===401?'نام کاربری یا رمز عبور نادرست است.':(e.message||'ورود ناموفق بود.'),true); }
+    };
+    const forgot = () => {
+      const previousUsername = m.querySelector('#c_u')?.value || '';
+      m.querySelector('.box').innerHTML = `<div class="row" style="margin-bottom:10px"><div class="logo">ف</div><div><b>بازیابی رمز مدیر</b><div class="mini">با کد بازیابی‌ای که هنگام ثبت مدیر ذخیره کردی.</div></div></div><div class="f"><label>نام کاربری</label><input id="c_ru" autocomplete="username"></div><div class="f"><label>کد بازیابی</label><input id="c_rc" class="ltr" autocomplete="off"></div><div class="f"><label>رمز جدید (حداقل ۱۰ نویسه)</label><input id="c_rp" class="ltr" type="password" autocomplete="new-password"></div><div class="f"><label>تکرار رمز جدید</label><input id="c_rp2" class="ltr" type="password" autocomplete="new-password"></div><div id="c_s" class="mini" style="margin:8px 0"></div><div class="row"><button class="btn p" id="c_recover">بازیابی و تغییر رمز</button><button class="btn" id="c_back">بازگشت</button></div>`;
+      m.querySelector('#c_back').onclick=()=>loginScreen();
+      const recover=async()=>{const username=m.querySelector('#c_ru').value.trim(),recoveryCode=m.querySelector('#c_rc').value.trim(),newPassword=m.querySelector('#c_rp').value;if(newPassword.length<10||newPassword!==m.querySelector('#c_rp2').value)return st('رمز جدید باید حداقل ۱۰ نویسه باشد و هر دو فیلد یکسان باشند.',true);st('در حال بازیابی…');try{const r=await api('POST','/api/mother/auth/recover',{username,recoveryCode,newPassword},{quiet:true,timeout:15000});codePanel(r.recoveryCode,'رمز تغییر کرد؛ کد بازیابی جدید را ذخیره کن','login');}catch(e){st(e.message||'بازیابی انجام نشد.',true);}};
+      m.querySelector('#c_recover').onclick=recover; m.querySelector('#c_ru').value=previousUsername;
+    };
+    m.querySelector('#c_go').onclick=go; m.querySelector('#c_k').addEventListener('keydown',e=>{if(e.key==='Enter')go();}); m.querySelector('#c_forgot').onclick=forgot; m.querySelector('#c_u').focus();
+  }
+}
+function connectScreen() { return loginScreen(); }
+function noServerPage() { return loginScreen(); }
+async function boot() {
+  const root = $('#app'); root.innerHTML = '<div class="empty" style="margin-top:30vh">در حال اتصال به سرور مرکزی فرتاک…</div>';
+  if (!SRV.now) { S.auth = false; return loginScreen(); }
+  if (!SRV.now.key) { S.auth = false; root.innerHTML = ''; return loginScreen(); }
+  try { await resolvePointer(SRV.now); SRV.save(); await api('GET', '/api/mother/ping', undefined, { quiet: true, timeout: 12000 }); S.auth = true; await refreshMeta(); await loadConfig(); renderAll(); }
+  catch (e) {
+    if (e.status === 401) { S.auth = false; SRV.now.key = ''; SRV.save(); root.innerHTML = ''; await loginScreen(); toast('نشست مدیر منقضی شده؛ دوباره وارد شوید.', true); return; }
+    S.auth = false; /* keep the saved session: the server is only temporarily unreachable */
+    root.innerHTML = `<div class="empty" style="margin-top:26vh;line-height:2.2">${esc(e.message || 'اتصال به سرور برقرار نشد.')}<br><button class="btn p" id="bootRetry" style="margin-top:14px">تلاش مجدد</button></div>`;
+    $('#bootRetry').onclick = () => boot(); setTimeout(() => { if (!S.auth && $('#bootRetry')) boot(); }, 8000);
+  }
+}
+setInterval(async () => { if (S.auth) { await refreshMeta(); const p = $('#pillSrv'); if (p) { p.className = 'pill ' + (S.online >= 0 ? 'ok' : 'bad'); p.innerHTML = `<span class="dot"></span>${esc(SRV.now?.name || 'سرور')} · ${S.online >= 0 ? fa(S.online) + ' اپ آنلاین' : 'قطع'}`; } } }, 30000);
+window.addEventListener('beforeunload', (e) => { if (S.dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+/* ===== Pages: dashboard, apps, server, brand, sections, banners, market ===== */
+const TOMAN = (n) => fa(n) + ' تومان';
+const stat = (k, v, s = '') => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div>${s ? `<div class="s">${s}</div>` : ''}</div>`;
+const GRADS = [['from-amber-600 via-yellow-500 to-amber-700', 'طلایی'], ['from-emerald-600 via-teal-500 to-cyan-700', 'زمردی'], ['from-purple-600 via-pink-500 to-orange-500', 'بنفش-نارنجی'], ['from-rose-600 via-pink-500 to-purple-700', 'سرخ-بنفش'], ['from-cyan-600 via-blue-500 to-blue-600', 'آبی'], ['from-slate-900 via-slate-950 to-emerald-950', 'تیره']];
+const MODELS = ['claude-sonnet-5-5', 'claude-opus-5-5', 'claude-haiku-5-5', 'claude-fable-5-1'];
+
+/* ---------------- dashboard ---------------- */
+PG.dash = {
+  async render() {
+    const [sv, pay, us, sg, ai, pr] = await Promise.all([
+      api('GET', '/api/mother/server'), api('GET', '/api/mother/payments'), api('GET', '/api/mother/users'),
+      api('GET', '/api/mother/signals'), api('GET', '/api/mother/ai/stats'), api('GET', '/api/mother/prices'),
+    ]);
+    const s = sv.server, ps = pay.stats, active = sg.signals.filter((x) => ['ACTIVE', 'TP1', 'TP2'].includes(x.status)).length;
+    const sim = pr.prices.filter((p) => p.simulated).length;
+    const warn = [];
+    if (!s.anthropic) warn.push('کلید API کلود تنظیم نشده؛ هوش مصنوعی پاسخ نمی‌دهد → صفحه «هوش مصنوعی»');
+    if (!s.zarinpal) warn.push('مرچنت‌کد زرین‌پال تنظیم نشده؛ پرداخت کار نمی‌کند → صفحه «اشتراک و پرداخت»');
+    if (sim) warn.push(`${fa(sim)} نماد به‌جای قیمت زنده شبیه‌سازی می‌شود (منبع قیمت در دسترس نیست) → صفحه «نمادها و قیمت»`);
+    if (s.devMode) warn.push('سرور در حالت DEV_MODE است؛ در محیط واقعی خاموشش کنید.');
+    return `${warn.map((w) => `<div class="note">⚠️ ${esc(w)}</div>`).join('')}
+    <div class="grid g4 keep">${stat('اپ‌های آنلاین', fa(s.onlineApps), `از ${fa(s.totalApps)} اپ ثبت‌شده`)}${stat('کاربران', fa(us.total), `${fa(us.vipCount)} کاربر VIP`)}
+    ${stat('درآمد ۲۴ ساعت', fa(ps.last24h), 'تومان')}${stat('درآمد ۳۰ روز', fa(ps.last30d), 'تومان')}
+    ${stat('سیگنال فعال', fa(active), `${fa(sg.signals.length)} سیگنال کل`)}${stat('پیام‌های AI (کل)', fa(ai.stats.requests), `${fa(ai.stats.errors)} خطا`)}
+    ${stat('موجودی کیف پول کاربران', fa(ps.walletLiability), 'تومان (بدهی سیستم)')}${stat('آپتایم سرور', fa(Math.round(s.uptimeSec / 3600)) + ' ساعت', `نسخه ${s.version} · ${fa(s.memoryMB)}MB`)}</div>
+    <div class="card" style="margin-top:12px"><h3 class="sec">⚡ اقدام سریع</h3><div class="row">
+      <button class="btn p" data-act="bcast">🔄 اجبار همه اپ‌ها به بروزرسانی تنظیمات</button>
+      <button class="btn" data-act="mkBackup">💾 پشتیبان‌گیری</button>
+      <button class="btn a" data-act="genSig">⚡ تولید سیگنال خودکار</button></div></div>
+    <div class="card"><h3 class="sec">💳 آخرین پرداخت‌ها</h3>${payTable(pay.payments.slice(0, 6))}</div>`;
+  },
+};
+ACT.bcast = async () => { await api('POST', '/api/mother/broadcast/refresh'); toast('همه اپ‌ها ظرف چند ثانیه بروزرسانی می‌شوند'); };
+ACT.mkBackup = async () => { const r = await api('POST', '/api/mother/server/backup'); toast('پشتیبان ساخته شد: ' + r.file); };
+ACT.genSig = async () => { const r = await api('POST', '/api/mother/signals/generate'); toast('سیگنال ' + r.signal.symbol + ' منتشر شد'); };
+const STATUS_FA = { PAID: ['پرداخت‌شده', 'g'], PENDING: ['در انتظار', 'y'], FAILED: ['ناموفق', 'r'], ERROR: ['خطا', 'r'] };
+function payTable(list) {
+  if (!list.length) return '<div class="empty">هنوز پرداختی ثبت نشده</div>';
+  return `<div class="tw"><table><tr><th>زمان</th><th>کاربر</th><th>نوع</th><th>مبلغ</th><th>وضعیت</th><th>کد پیگیری</th></tr>${list.map((p) => { const st = STATUS_FA[p.status] || [p.status, '']; return `<tr><td>${when(p.createdAt)}</td><td>${esc(p.userName)} <span class="mini ltr">${esc(p.userPhone)}</span></td><td>${p.type === 'plan' ? 'اشتراک' : 'شارژ کیف پول'}</td><td>${fa(p.amount)}</td><td><span class="chip ${st[1]}">${st[0]}</span></td><td class="ltr">${esc(p.refId || '—')}</td></tr>`; }).join('')}</table></div>`;
+}
+
+/* ---------------- connected apps ---------------- */
+PG.apps = {
+  async render() {
+    await refreshMeta();
+    const groups = S.groups.map((g) => `<span class="chip b" style="padding:4px 10px">👥 ${esc(g.name)} · ${fa(g.members)} اپ <a href="#" data-act="editGroup" data-g="${esc(g.name)}">ویرایش تنظیمات</a> · <a href="#" data-act="delGroup" data-g="${esc(g.name)}" style="color:#fb7185">حذف</a></span>`).join(' ');
+    const rows = S.apps.map((a) => `<tr><td><span class="chip ${a.online ? 'g' : ''}">${a.online ? '● آنلاین' : 'آفلاین'}</span> ${a.blocked ? '<span class="chip r">مسدود</span>' : ''}</td>
+      <td><b>${esc(a.name || a.reportedName || 'بدون نام')}</b><div class="mini ltr">${esc(a.id)}</div></td><td>${esc(a.group || '—')}</td>
+      <td class="mini">${esc(a.platform || '')} ${esc(a.version || '')}<div class="ltr">${esc(a.ip || '')}</div></td><td class="mini">${when(a.lastSeen)}<div>${fa(a.hits)} درخواست</div></td>
+      <td><div class="row"><button class="btn s" data-act="appEdit" data-id="${esc(a.id)}">تنظیم</button><button class="btn s p" data-act="appCfg" data-id="${esc(a.id)}">⚙ تنظیمات اختصاصی${a.hasOverrides ? ' ●' : ''}</button>
+      <button class="btn s" data-act="appRefresh" data-id="${esc(a.id)}">🔄</button><button class="btn s ${a.blocked ? 'p' : 'd'}" data-act="appBlock" data-id="${esc(a.id)}">${a.blocked ? 'رفع مسدودی' : 'مسدود'}</button><button class="btn s d" data-act="appDel" data-id="${esc(a.id)}">حذف</button></div></td></tr>`).join('');
+    return `<div class="note info">هر اپ عمومی که به سرور شما وصل شود <b>خودکار</b> اینجا ثبت می‌شود و به‌صورت پیش‌فرض از تنظیمات سراسری پیروی می‌کند. می‌توانید اپ‌ها را گروه‌بندی کنید یا برای هر اپ تنظیمات جداگانه بگذارید؛ همه روی همین یک سرور کار می‌کنند.</div>
+    <div class="card"><div class="row sp"><h3 class="sec">گروه‌ها</h3><button class="btn s p" data-act="newGroup">＋ گروه جدید</button></div><div class="row">${groups || '<span class="mini">گروهی ندارید</span>'}</div></div>
+    <div class="card"><h3 class="sec">اپ‌های متصل (${fa(S.apps.length)})</h3><div class="tw"><table><tr><th>وضعیت</th><th>اپ</th><th>گروه</th><th>دستگاه</th><th>آخرین اتصال</th><th>عملیات</th></tr>${rows || '<tr><td colspan="6" class="empty">هنوز اپی متصل نشده — در صفحه «سرور VPS» کد اتصال را بگیرید.</td></tr>'}</table></div></div>`;
+  },
+};
+const appById = (id) => S.apps.find((a) => a.id === id);
+ACT.appEdit = async (b) => {
+  const a = appById(b.dataset.id); const name = prompt('نام نمایشی اپ:', a.name || a.reportedName || ''); if (name === null) return;
+  const group = prompt('نام گروه (خالی = بدون گروه):', a.group || ''); if (group === null) return;
+  await api('POST', '/api/mother/apps/' + encodeURIComponent(a.id), { name, group }); await refreshMeta(); renderPage();
+};
+ACT.appCfg = async (b) => { S.target = 'app:' + b.dataset.id; await loadConfig(); renderAll(); goto('brand'); toast('اکنون تنظیمات اختصاصی این اپ را ویرایش می‌کنید'); };
+ACT.editGroup = async (b, e) => { e.preventDefault(); S.target = 'group:' + b.dataset.g; await loadConfig(); renderAll(); goto('brand'); };
+ACT.appRefresh = async (b) => { await api('POST', '/api/mother/apps/' + encodeURIComponent(b.dataset.id), { forceRefresh: true }); toast('دستور بروزرسانی ارسال شد'); };
+ACT.appBlock = async (b) => { const a = appById(b.dataset.id); await api('POST', '/api/mother/apps/' + encodeURIComponent(a.id), { blocked: !a.blocked }); renderPage(); };
+ACT.appDel = async (b) => { if (!confirm('این اپ از لیست حذف شود؟ (اگر دوباره وصل شود دوباره ثبت می‌شود)')) return; await api('DELETE', '/api/mother/apps/' + encodeURIComponent(b.dataset.id)); renderPage(); };
+ACT.newGroup = async () => { const n = prompt('نام گروه جدید:'); if (!n) return; await api('POST', '/api/mother/groups', { name: n }); renderPage(); };
+ACT.delGroup = async (b, e) => { e.preventDefault(); if (!confirm('گروه حذف شود؟ اپ‌های عضو به تنظیمات سراسری برمی‌گردند.')) return; await api('DELETE', '/api/mother/groups/' + encodeURIComponent(b.dataset.g)); if (S.target === 'group:' + b.dataset.g) { S.target = 'global'; await loadConfig(); } await refreshMeta(); renderAll(); };
+
+/* ---------------- VPS server ---------------- */
+PG.server = {
+  async render() {
+    const sv = (await api('GET', '/api/mother/server')).server;
+    return `<div class="grid g3 keep">${stat('وضعیت اتصال', '<span style="color:#34d399">● متصل</span>', 'سرور Render')}${stat('نسخه سرویس', esc(sv.version), 'ذخیره‌سازی پایدار D1')}${stat('اپ‌های فعال', fa(sv.onlineApps || 0), `${fa(sv.totalApps || 0)} اپ ثبت‌شده`)}</div>
+    <div class="card" style="margin-top:12px"><h3 class="sec">☁️ تنظیمات سرور مرکزی</h3><p class="mini" style="line-height:2">آدرس سرویس مرکزی داخل اپ ثابت و از پیش تنظیم شده است؛ نیازی به واردکردن IP یا آدرس سرور در اپ عمومی نیست. تنظیمات این صفحه فقط وضعیت اتصال، اطلاع‌رسانی و پیکربندی Cloudflare را مدیریت می‌کند.</p>
+    <div class="f"><label>آدرس ثابت Worker</label><div class="row"><code class="ltr" style="flex:1;overflow-wrap:anywhere">${esc(FIXED_SERVER_URL)}</code><button class="btn s" data-act="copy" data-v="${esc(FIXED_SERVER_URL)}">کپی آدرس</button></div></div>
+    <div class="row" style="margin-top:12px"><button class="btn p" data-act="forceRefresh">ارسال فرمان تازه‌سازی به اپ‌های عمومی</button><button class="btn" data-act="checkServer">بررسی اتصال</button></div><div class="mini" style="margin-top:10px">نسخه‌های جدید محتوایی و تنظیمات از سرویس مرکزی دریافت می‌شوند. به‌روزرسانی فایل APK اندروید ممکن است همچنان به تأیید نصب بسته جدید نیاز داشته باشد.</div></div>
+    <div class="card"><h3 class="sec">داده‌های بازار مستقل</h3><p class="mini" style="line-height:2">داده‌های قیمت و کندل باید مستقیماً از سرویس‌های بازار دریافت شوند. قطع Worker فقط پیام‌رسانی و همگام‌سازی تنظیمات را محدود می‌کند؛ سایر قابلیت‌ها در صورت در دسترس بودن اینترنت و منبع داده ادامه می‌یابند.</p></div>`;
+  },
+};
+ACT.forceRefresh = async () => { await api('POST','/api/mother/broadcast/refresh',{}); toast('فرمان تازه‌سازی برای اپ‌های ثبت‌شده ارسال شد ✓'); };
+ACT.checkServer = async () => { const r=await api('GET','/api/status',undefined,{quiet:true}); toast('اتصال موفق · '+(r.name||'Fartak Worker')); renderPage(); };
+
+PG.brand = {
+  cfg: true,
+  render() {
+    return `<div class="card"><h3 class="sec">هویت برند</h3><div class="grid g2">
+      ${F('brand.name', 'نام پلتفرم (هدر اپ)')}${F('brand.shortLetter', 'حرف لوگو')}${F('brand.strategyName', 'نام استراتژی', 'text', { hint: 'نام اندیکاتور نمایش‌داده‌شده در چارت' })}${F('brand.indicatorName', 'نام اندیکاتور', 'text', { hint: 'در چارت و تحلیل نمایش داده می‌شود' })}
+      ${F('brand.tagline', 'شعار صفحه اصلی', 'text')}${F('brand.supportInstagram', 'اینستاگرام (بدون @)', 'text', { ltr: true })}${F('brand.supportWhatsapp', 'شماره واتساپ پشتیبانی', 'text', { ltr: true })}${F('brand.supportTelegram', 'آیدی تلگرام پشتیبانی', 'text', { ltr: true })}</div></div>
+    <div class="card"><h3 class="sec">رنگ و ظاهر</h3><div class="grid g3">${F('theme.primary', 'رنگ اصلی (دکمه‌ها)', 'color', { def: '#10b981' })}${F('theme.accent', 'رنگ تأکیدی (VIP/طلایی)', 'color', { def: '#f59e0b' })}${F('theme.background', 'رنگ پس‌زمینه', 'color', { def: '#0b1120' })}</div>
+      <div style="margin-top:8px">${F('theme.customCss', 'CSS سفارشی (پیشرفته)', 'textarea', { rows: 4, ltr: true, ph: '.my-class { ... }' })}</div>
+      <div class="row" style="margin-top:6px"><button class="btn s" data-act="clearTheme">پاک‌کردن رنگ‌ها (برگشت به پیش‌فرض)</button></div></div>
+    <div class="card"><h3 class="sec">تغییر هر متن در اپ عمومی</h3><p class="mini">هر متن فارسی/انگلیسی در اپ عمومی را عیناً بنویسید و جایگزینش را بدهید؛ در کل اپ (همه صفحات) اعمال می‌شود. مثال: «گردونه شانس روزانه» ← «چرخ جایزه».</p>${KV('textOverrides')}</div>
+    <div class="card"><h3 class="sec">🚧 حالت تعمیر و به‌روزرسانی</h3><div class="grid g2">${F('maintenance.enabled', 'فعال‌سازی حالت تعمیر (اپ قفل می‌شود)', 'switch')}${F('maintenance.message', 'پیام نمایش‌داده‌شده', 'text')}</div></div>
+    <div class="card"><h3 class="sec">نسخه و بروزرسانی اجباری</h3><div class="grid g3">${F('app.servers', 'آدرس‌های اضافی سرور (آدرس‌های جایگزین سرور)', 'tags', { ph: 'https://api.example.com', hint: 'با کاما جدا کنید؛ اپ‌های عمومی در صورت قطع بودن آدرس اصلی خودکار از این آدرس‌ها استفاده می‌کنند.' })}${F('app.showOnlineCount', 'نمایش «تعداد اپ آنلاین» به کاربران', 'switch')}${F('app.refreshSec', 'هر چند ثانیه تنظیمات بروز شود', 'number', { min: 5 })}${F('app.minVersion', 'حداقل نسخه مجاز اپ', 'text', { ltr: true, ph: '1.0.0' })}${F('app.forceUpdateUrl', 'لینک دانلود نسخه جدید', 'text', { ltr: true })}</div></div>`;
+  },
+};
+ACT.clearTheme = () => { setP('theme.primary', ''); setP('theme.accent', ''); setP('theme.background', ''); renderPage(); };
+
+/* ---------------- sections & tabs ---------------- */
+PG.sections = {
+  cfg: true,
+  render() {
+    const sw = (p, l) => F(p, l, 'switch');
+    return `<div class="card"><h3 class="sec">تب‌های پایین اپ (نمایش / نام / ترتیب)</h3><p class="mini">تب خاموش کاملاً از اپ حذف می‌شود. نشان (Badge) متن کوچک روی آیکن است؛ خالی = بدون نشان.</p>
+      ${L('tabs', 'تب', [{ k: 'label', label: 'نام تب' }, { k: 'badge', label: 'نشان (Badge)' }, { k: 'enabled', label: 'فعال', type: 'switch' }], { id: '', label: '', enabled: true, badge: '' }, { itemTitle: (t) => t.id, noRemove: true })}</div>
+    <div class="card"><h3 class="sec">ویجت‌های صفحه خانه</h3><div class="grid g3">${sw('home.showBanners', 'بنرهای مدیریت')}${sw('home.showHero', 'کارت معرفی بالای صفحه')}${sw('home.showLivePrices', 'نرخ‌های زنده')}${sw('home.showNews', 'ویجت سشن‌ها و اخبار اقتصادی')}${sw('home.showAnalysisHub', 'مرکز تحلیل (تب نمودار)')}${sw('home.showLatestSignals', 'آخرین سیگنال‌ها')}${sw('home.showWheelButton', 'دکمه گردونه شانس')}${sw('home.showTokenWallet', 'دکمه کیف پول توکن')}${sw('home.robotEnabled', 'ربات متحرک فرتاک')}</div>
+      <div class="grid g2" style="margin-top:8px">${F('home.heroTitle', 'تیتر کارت معرفی (خالی = پیش‌فرض)')}${F('home.heroText', 'متن کارت معرفی (خالی = پیش‌فرض)', 'textarea', { rows: 2 })}</div></div>
+    <div class="card"><h3 class="sec">صفحه سیگنال‌ها</h3><div class="grid g3">${sw('signalsUi.enabled', 'نمایش سیگنال‌ها')}${sw('signalsUi.showFreeSignals', 'سیگنال‌های رایگان')}${sw('signalsUi.showHistory', 'تاریخچه (بسته‌شده‌ها)')}${F('signalsUi.maxVisible', 'حداکثر تعداد نمایش', 'number', { min: 1 })}${F('signalsUi.lockedMessage', 'پیام قفل VIP')}</div></div>
+    <div class="card"><h3 class="sec">گردونه شانس</h3><div class="grid g3">${F('economy.wheelEnabled', 'نمایش گردونه شانس', 'switch')}</div><p class="mini">جوایز در صفحه «توکن و گردونه» تنظیم می‌شود.</p></div>
+    <div class="card"><h3 class="sec">ثبت‌نام، مهمان و دوره آزمایشی</h3><div class="grid g3">${sw('auth.requireLogin', 'اجبار ورود/ثبت‌نام')}${sw('auth.allowGuest', 'اجازه مهمان (پیشنهاد: خاموش)')}${sw('auth.allowRegistration', 'ثبت‌نام کاربر جدید')}${sw('auth.overviewOnlyTrial', 'دوره آزمایشی فقط نمای کلی')}${F('subscription.trialDays', 'مدت نمای کلی رایگان (روز)', 'number', { min: 0, max: 30 })}</div><p class="mini">مهمان نباید به تب‌ها و قابلیت‌های اصلی دسترسی داشته باشد. کاربران ثبت‌نام‌شده در مدت تعیین‌شده فقط نمای کلی را می‌بینند؛ قابلیت‌های پولی باید در سمت سرور نیز کنترل شوند.</p></div>
+    <div class="card"><h3 class="sec">بلیط گردونه و دعوت موفق</h3><div class="grid g3">${F('economy.signupBonusSpins', 'بلیط هدیه ثبت‌نام', 'number', { min: 0 })}${F('economy.referralInviterSpins', 'بلیط دعوت‌کننده پس از خرید اشتراک', 'number', { min: 0 })}${F('economy.referralInviteeSpins', 'بلیط دعوت‌شده پس از خرید اشتراک', 'number', { min: 0 })}</div><p class="mini">پاداش دعوت یک‌بار و فقط برای اولین خرید هر کاربر دعوت‌شده اعمال می‌شود. تا وقتی درگاه پرداخت وصل نیست، پس از دریافت پول از کاربر در بخش «کاربران» دکمهٔ ✅ (تأیید خرید اشتراک) را بزنید تا اشتراک فعال و بلیط‌ها خودکار داده شوند.</p></div>`;
+  },
+};
+
+/* ---------------- banners ---------------- */
+PG.banners = {
+  cfg: true,
+  render() {
+    return `<div class="card"><h3 class="sec">نوار اعلان متحرک بالای اپ</h3><div class="grid g2">${F('announcement.active', 'نمایش نوار اعلان', 'switch')}${F('announcement.text', 'متن اعلان')}</div>
+      <div class="row" style="margin-top:8px"><button class="btn s" data-act="aiAnn">✨ پیشنهاد متن با Claude</button></div></div>
+    <div class="card"><h3 class="sec">بنرهای داشبورد</h3>${L('banners', 'بنر', [
+      { k: 'title', label: 'عنوان', full: true }, { k: 'description', label: 'توضیحات', type: 'textarea', full: true, opts: { rows: 2 } }, { k: 'badge', label: 'برچسب' },
+      { k: 'linkTab', label: 'مقصد دکمه', type: 'select', opts: { options: [['signals', 'سیگنال‌ها'], ['chart', 'نمودار'], ['ai', 'فرتاک AI'], ['journal', 'ژورنال'], ['profile', 'پروفایل'], ['home', 'خانه']] } },
+      { k: 'gradient', label: 'طرح رنگی', type: 'select', opts: { options: GRADS } }, { k: 'color1', label: 'رنگ سفارشی ۱ (اختیاری)', type: 'color' }, { k: 'color2', label: 'رنگ سفارشی ۲ (اختیاری)', type: 'color' },
+      { k: 'isActive', label: 'فعال', type: 'switch' }], { id: '__ID__', title: 'عنوان بنر', description: '', badge: 'ویژه', type: 'PROMO', linkTab: 'signals', gradient: GRADS[0][0], isActive: true, createdAt: 'امروز' }, { itemTitle: (b) => b.title || 'بنر', cols: 'g3' })}
+      <div class="row" style="margin-top:8px"><button class="btn s" data-act="aiBanner">✨ ساخت متن بنر با Claude</button></div></div>`;
+  },
+};
+ACT.aiAnn = async () => { const t = prompt('درباره چه چیزی اعلان بنویسم؟ (مثلاً: تخفیف ۵۰٪ اشتراک)'); if (!t) return; const r = await api('POST', '/api/mother/ai/assist', { task: 'announcement', input: t }); setP('announcement.text', r.text.replace(/^["«]|["»]$/g, '')); renderPage(); };
+ACT.aiBanner = async () => { const t = prompt('موضوع بنر؟'); if (!t) return; const r = await api('POST', '/api/mother/ai/assist', { task: 'banner', input: t }); let j = {}; try { j = JSON.parse(r.text.replace(/```json|```/g, '').trim()); } catch { return toast('پاسخ قابل‌استفاده نبود؛ دوباره امتحان کنید', true); }
+  const arr = getP('banners') || []; arr.unshift({ id: uid('bnr-'), title: j.title || t, description: j.description || '', badge: 'ویژه', type: 'PROMO', linkTab: 'signals', gradient: GRADS[0][0], isActive: true, createdAt: 'امروز' }); setP('banners', arr); renderPage(); };
+
+/* ---------------- symbols & prices ---------------- */
+PG.symbols = {
+  cfg: true,
+  async render() {
+    const pr = await api('GET', '/api/mother/prices');
+    const h = Object.fromEntries(pr.prices.map((p) => [p.symbol, p]));
+    const live = (getP('symbols') || []).map((s) => { const x = h[s.symbol]; return `<tr><td><b>${esc(s.symbol)}</b></td><td class="ltr">${x ? x.price : '—'}</td><td>${x ? (x.simulated ? '<span class="chip y">شبیه‌سازی</span>' : '<span class="chip g">زنده</span>') : ''}</td><td class="mini">${esc(x?.error || '')}</td><td><button class="btn s" data-act="setPrice" data-s="${esc(s.symbol)}">قیمت دستی</button></td></tr>`; }).join('');
+    return `<div class="note info">برای هر نماد منبع قیمت انتخاب کنید: <b>Binance</b> (کریپتو، رایگان)، <b>Yahoo</b> (نقره/طلا/شاخص‌ها، تقریباً زنده)، <b>دستی</b> (قیمت را خودتان در همین صفحه می‌دهید) یا <b>شبیه‌سازی</b>. اگر منبع زنده قطع شود، سرور قیمت را شبیه‌سازی می‌کند و در جدول پایین علامت می‌زند.</div>
+    <div class="card"><h3 class="sec">نمادهای قابل نمایش در اپ‌ها</h3>${L('symbols', 'نماد', [
+      { k: 'symbol', label: 'کد نماد', opts: { ltr: true } }, { k: 'persianName', label: 'نام فارسی' }, { k: 'name', label: 'نام انگلیسی', opts: { ltr: true } }, { k: 'icon', label: 'آیکن (متن کوتاه)' },
+      { k: 'decimals', label: 'تعداد اعشار', type: 'number' }, { k: 'category', label: 'دسته', type: 'select', opts: { options: ['CRYPTO', 'FOREX', 'INDEX', 'COMMODITY', 'STOCK'] } },
+      { k: 'source', label: 'منبع قیمت', type: 'select', opts: { options: [['binance', 'Binance'], ['yahoo', 'Yahoo Finance'], ['manual', 'دستی'], ['sim', 'شبیه‌سازی']] } }, { k: 'sourceSymbol', label: 'کد در منبع', opts: { ltr: true, hint: 'مثلاً BTCUSDT یا SI=F' } },
+      { k: 'fallbackPrice', label: 'قیمت پایه/جایگزین', type: 'number' }, { k: 'enabled', label: 'نمایش در اپ', type: 'switch' }],
+      { symbol: 'NEWUSD', name: 'New', persianName: 'نماد جدید', icon: '◆', decimals: 2, category: 'CRYPTO', enabled: true, source: 'sim', sourceSymbol: '', fallbackPrice: 100, volume: '-' }, { itemTitle: (s) => `${s.symbol} — ${s.persianName}`, cols: 'g3' })}</div>
+    <div class="card"><h3 class="sec">وضعیت لحظه‌ای قیمت‌ها</h3><div class="tw"><table><tr><th>نماد</th><th>قیمت</th><th>حالت</th><th>خطا</th><th></th></tr>${live}</table></div><p class="mini">برای دیدن تغییرات منبع بعد از ذخیره، صفحه را رفرش کنید.</p></div>`;
+  },
+};
+ACT.setPrice = async (b) => { const p = prompt('قیمت جدید برای ' + b.dataset.s + ' (فقط برای نمادی با منبع «دستی» ماندگار است):'); if (!p) return; await api('POST', '/api/mother/prices/manual', { symbol: b.dataset.s, price: parseFloat(p) }); toast('ثبت شد'); renderPage(); };
+
+/* ---------------- news & sessions ---------------- */
+PG.news = {
+  cfg: true,
+  render() {
+    return `<div class="card"><h3 class="sec">اخبار و تقویم اقتصادی</h3><div class="grid g2">${F('home.showNews', 'نمایش ویجت سشن/اخبار در صفحه خانه', 'switch')}${F('news.title', 'عنوان ویجت')}</div>
+      <div style="margin-top:10px">${L('news.items', 'خبر', [{ k: 'persianTitle', label: 'عنوان فارسی', full: true }, { k: 'title', label: 'عنوان انگلیسی', opts: { ltr: true } }, { k: 'currency', label: 'ارز/بازار', opts: { ltr: true } },
+        { k: 'impact', label: 'اهمیت', type: 'select', opts: { options: [['HIGH', 'بالا'], ['MEDIUM', 'متوسط'], ['LOW', 'کم']] } }, { k: 'date', label: 'تاریخ (متن، مثلاً امروز)' }, { k: 'timeTehran', label: 'ساعت تهران' },
+        { k: 'forecast', label: 'پیش‌بینی' }, { k: 'previous', label: 'قبلی' }, { k: 'actual', label: 'واقعی (خالی=هنوز اعلام نشده)' }, { k: 'countdownMinutes', label: 'دقیقه تا رویداد', type: 'number' },
+        { k: 'analysisNote', label: 'تحلیل کوتاه', type: 'textarea', full: true, opts: { rows: 2 } }, { k: 'enabled', label: 'نمایش', type: 'switch' }],
+        { id: '__ID__', title: 'New Event', persianTitle: 'رویداد جدید', currency: 'USD', impact: 'HIGH', date: 'امروز', timeTehran: '۱۶:۰۰', forecast: '', previous: '', countdownMinutes: 60, analysisNote: '', enabled: true }, { itemTitle: (n) => n.persianTitle || n.title || 'خبر', cols: 'g3' })}</div></div>
+    <div class="card"><h3 class="sec">سشن‌های بازار (توکیو، لندن، ...)</h3><p class="mini">ساعت‌های UTC برای محاسبه «باز/بسته بودن» سشن و ساعت‌های تهران برای نمایش استفاده می‌شود.</p>${L('news.sessions', 'سشن', [{ k: 'persianName', label: 'نام فارسی', full: true }, { k: 'name', label: 'نام انگلیسی', opts: { ltr: true } }, { k: 'city', label: 'شهر' },
+        { k: 'openUtcHour', label: 'شروع (ساعت UTC)', type: 'number' }, { k: 'openUtcMin', label: 'شروع (دقیقه)', type: 'number' }, { k: 'closeUtcHour', label: 'پایان (ساعت UTC)', type: 'number' }, { k: 'closeUtcMin', label: 'پایان (دقیقه)', type: 'number' },
+        { k: 'tehranOpen', label: 'شروع به وقت تهران' }, { k: 'tehranClose', label: 'پایان به وقت تهران' }, { k: 'volatility', label: 'نوسان' }, { k: 'description', label: 'توضیح', type: 'textarea', full: true, opts: { rows: 2 } }, { k: 'enabled', label: 'نمایش', type: 'switch' }],
+        { id: '__ID__', name: 'New Session', persianName: 'سشن جدید', city: '', openUtcHour: 0, openUtcMin: 0, closeUtcHour: 8, closeUtcMin: 0, tehranOpen: '', tehranClose: '', isActive: false, volatility: 'بالا (High)', description: '', enabled: true }, { itemTitle: (s) => s.persianName, cols: 'g3' })}</div>`;
+  },
+};
+
+/* ---------------- chart ---------------- */
+PG.chart = {
+  cfg: true,
+  render() {
+    const syms = (getP('symbols') || []).map((s) => [s.symbol, `${s.symbol} — ${s.persianName}`]);
+    return `<div class="card"><h3 class="sec">تنظیمات چارت</h3><div class="grid g3">${F('chart.enabled', 'نمایش تب چارت', 'switch')}${F('chart.defaultSymbol', 'نماد پیش‌فرض', 'select', { options: syms })}${F('chart.defaultTimeframe', 'تایم‌فریم پیش‌فرض', 'select', { options: ['1m', '5m', '15m', '30m', '1h', '4h', '1d'] })}
+      <div style="grid-column:1/-1">${F('chart.timeframes', 'تایم‌فریم‌های قابل انتخاب', 'tags', { ph: '1m, 5m, 15m, 1h, 4h, 1d', hint: 'با ویرگول جدا کنید' })}</div></div></div>
+    <div class="card"><h3 class="sec">لایه‌های نمایشی روی چارت</h3><div class="grid g3">${F('chart.showIndicator', 'اندیکاتور فرتاک', 'switch')}${F('chart.showOrderBlocks', 'اردر بلاک', 'switch')}${F('chart.showIchimoku', 'ایچیموکو', 'switch')}${F('chart.showSupplyDemand', 'محدوده عرضه/تقاضا', 'switch')}${F('chart.showVolume', 'حجم', 'switch')}${F('chart.showSignalsOnChart', 'نمایش سیگنال‌ها روی چارت', 'switch')}${F('chart.askAiButton', 'دکمه «از فرتاک AI بپرس»', 'switch')}</div></div>`;
+  },
+};
+
+/* ---------------- indicator ---------------- */
+PG.indicator = {
+  cfg: true,
+  render() {
+    return `<div class="note info">پارامترهای اندیکاتور <b>${esc(getP('brand.indicatorName'))}</b> که روی چارت همه اپ‌ها اعمال می‌شود. (حد سود و ضرر سیگنال‌ها در صفحه «حد سود و ضرر» تنظیم می‌شود.)</div>
+    <div class="card"><div class="grid g3">${F('indicator.swingLength', 'طول سوینگ', 'number', { min: 1 })}${F('indicator.minScore', 'حداقل امتیاز سیگنال', 'number', { min: 0, max: 100 })}${F('indicator.maxRiskPct', 'حداکثر ریسک (٪)', 'number', { step: 0.1 })}${F('indicator.slAtrBuf', 'بافر حد ضرر (ATR)', 'number', { step: 0.1 })}
+      ${F('indicator.tp1R', 'تارگت ۱ (R)', 'number', { step: 0.1 })}${F('indicator.tp2R', 'تارگت ۲ (R)', 'number', { step: 0.1 })}${F('indicator.tp3R', 'تارگت ۳ (R)', 'number', { step: 0.1 })}${F('indicator.watermarkText', 'متن واترمارک چارت', 'text', { ltr: true })}</div></div>`;
+  },
+};
+
+/* ===== Pages: signals, SL/TP control, journal, AI, plans/payments, users, economy, security ===== */
+const SIG_FA = { ACTIVE: ['فعال', 'g'], TP1: ['تارگت ۱', 'g'], TP2: ['تارگت ۲', 'g'], TP3: ['تارگت ۳ ✓', 'g'], SL: ['حد ضرر', 'r'], BE: ['سر به سر', 'y'], EXPIRED: ['منقضی', ''], CLOSED: ['بسته (دستی)', ''] };
+const globalOnlyNote = () => (S.target !== 'global' ? `<div class="note">⚠️ سیگنال‌ها و موتور آن‌ها برای همه اپ‌ها مشترک است؛ این صفحه فقط در حالت «سراسری» ویرایش می‌شود. <button class="btn s" data-act="toGlobal">رفتن به سراسری</button></div>` : '');
+ACT.toGlobal = async () => { S.target = 'global'; await loadConfig(); renderAll(); };
+
+/* ---------------- signals ---------------- */
+PG.signals = {
+  async render() {
+    const r = await api('GET', '/api/mother/signals'); const st = r.settings;
+    S.cache.sigs = r.signals;
+    const syms = (S.global.symbols || []).filter((s) => s.enabled !== false);
+    const rows = r.signals.slice(0, 60).map((s) => { const x = SIG_FA[s.status] || [s.status, '']; return `<tr><td><b>${esc(s.symbol)}</b> <span class="chip ${s.type === 'BUY' ? 'g' : 'r'}">${s.type === 'BUY' ? 'خرید' : 'فروش'}</span> ${s.isVip ? '<span class="chip y">VIP</span>' : ''} ${s.origin === 'AUTO' ? '<span class="chip b">خودکار</span>' : ''}</td>
+      <td class="ltr">${s.entryPrice}</td><td class="ltr">${s.stopLoss} <span class="mini">(${s.slPct}%)</span></td><td class="ltr">${s.takeProfit1} / ${s.takeProfit2} / ${s.takeProfit3}</td><td><span class="chip ${x[1]}">${x[0]}</span><div class="mini ltr">${s.pnlPercentage}%</div></td><td class="mini">${s.timeframe}</td>
+      <td><div class="row">${['ACTIVE', 'TP1', 'TP2'].includes(s.status) ? `<button class="btn s" data-act="sigClose" data-id="${s.id}">بستن</button>` : ''}<button class="btn s" data-act="sigEdit" data-id="${s.id}">✏️ حد سود/ضرر</button><button class="btn s d" data-act="sigDel" data-id="${s.id}">حذف</button></div></td></tr>`; }).join('');
+    return `<div class="card"><h3 class="sec">⚡ انتشار سیگنال دستی</h3>
+      <div class="note info">حد ضرر مجاز: <b>${fa(st.slMinPct)}٪ تا ${fa(st.slMaxPct)}٪</b> از قیمت ورود · تارگت‌های پیش‌فرض: <b>${fa(st.tp1R)}R / ${fa(st.tp2R)}R / ${fa(st.tp3R)}R</b> · حالت: ${st.enforceLimits ? '<b>سخت‌گیرانه (خارج از محدوده رد می‌شود)</b>' : '<b>اصلاح خودکار</b>'}. فیلدهای حد ضرر/تارگت را خالی بگذارید تا خودکار محاسبه شوند.</div>
+      <div class="grid g4 keep"><div class="f"><label>نماد</label><select id="sg_sym" data-local="1"><option value="">— انتخاب —</option>${syms.map((s) => `<option value="${esc(s.symbol)}">${esc(s.symbol)} — ${esc(s.persianName)}</option>`).join('')}</select></div>
+        <div class="f"><label>نوع</label><select id="sg_type"><option value="BUY">خرید (BUY)</option><option value="SELL">فروش (SELL)</option></select></div>
+        <div class="f"><label>تایم‌فریم</label><select id="sg_tf">${['1m', '5m', '15m', '30m', '1h', '4h', '1d'].map((t) => `<option ${t === '15m' ? 'selected' : ''}>${t}</option>`).join('')}</select></div>
+        <div class="f"><label>وین‌ریت (٪)</label><input type="number" id="sg_wr" value="92"></div>
+        <div class="f"><label>قیمت ورود <a href="#" data-act="sgPrice">(قیمت زنده)</a></label><input type="number" class="ltr" id="sg_entry" step="any"></div>
+        <div class="f"><label>حد ضرر</label><input type="number" class="ltr" id="sg_sl" step="any"></div>
+        <div class="f"><label>تارگت ۱</label><input type="number" class="ltr" id="sg_t1" step="any"></div>
+        <div class="f"><label>تارگت ۲</label><input type="number" class="ltr" id="sg_t2" step="any"></div>
+        <div class="f"><label>تارگت ۳</label><input type="number" class="ltr" id="sg_t3" step="any"></div>
+        <div class="f" style="grid-column:span 2"><label>توضیح تحلیل <a href="#" data-act="sgAi">(✨ با Claude)</a></label><input type="text" id="sg_desc" placeholder="مثلاً: تایید اردر بلاک صعودی"></div>
+        <div class="f"><label>یا نماد دستی (مثلاً XAUUSD)</label><input type="text" class="ltr" id="sg_custom" data-local="1" placeholder="هر نمادی که به چارت اضافه کرده‌اید"></div>
+        <div class="f"><label>نوع انتشار</label><select id="sg_vip"><option value="0">عمومی</option><option value="1">VIP</option></select></div></div>
+      <label class="sw" style="margin:8px 0"><span>سیگنال طلایی VIP (فقط مشترکین ببینند)</span><input type="checkbox" id="sg_vip" checked><i></i></label>
+      <div class="row"><button class="btn" data-act="sgPreview">👁 پیش‌نمایش و اعتبارسنجی سطوح</button><button class="btn p" data-act="sgPublish">📢 انتشار برای همه اپ‌ها</button><button class="btn a" data-act="genSig2">⚡ تولید خودکار یک سیگنال</button></div><div id="sg_out" style="margin-top:8px"></div></div>
+    <div class="card"><h3 class="sec">سیگنال‌ها (${fa(r.signals.length)})</h3><div class="tw"><table><tr><th>سیگنال</th><th>ورود</th><th>حد ضرر</th><th>تارگت‌ها</th><th>وضعیت</th><th>TF</th><th></th></tr>${rows || '<tr><td colspan="7" class="empty">سیگنالی وجود ندارد</td></tr>'}</table></div></div>`;
+  },
+};
+const sgBody = () => { const n = (id) => $('#' + id).value; return { symbol: (n('sg_custom').trim().toUpperCase()) || n('sg_sym'), isVip: n('sg_vip') === '1', type: n('sg_type'), timeframe: n('sg_tf'), winRate: +n('sg_wr'), entryPrice: n('sg_entry') ? +n('sg_entry') : undefined, stopLoss: n('sg_sl') ? +n('sg_sl') : undefined, takeProfit1: n('sg_t1') ? +n('sg_t1') : undefined, takeProfit2: n('sg_t2') ? +n('sg_t2') : undefined, takeProfit3: n('sg_t3') ? +n('sg_t3') : undefined, description: n('sg_desc'), isVip: $('#sg_vip').checked }; };
+const sigCard = (s, adj) => `<div class="note ok">ورود <b class="ltr">${s.entryPrice}</b> · حد ضرر <b class="ltr">${s.stopLoss}</b> (${s.slPct}٪) · تارگت‌ها <b class="ltr">${s.takeProfit1} / ${s.takeProfit2} / ${s.takeProfit3}</b> · ریسک به ریوارد ${s.riskRatio}${adj?.length ? '<br>🔧 ' + adj.map(esc).join(' · ') : ''}</div>`;
+ACT.sgPrice = async (b, e) => { e.preventDefault(); const r = await api('GET', '/api/mother/prices'); const p = r.full[$('#sg_sym').value]; if (p) $('#sg_entry').value = p.price; };
+ACT.sgPreview = async () => { try { const r = await api('POST', '/api/mother/signals/preview', sgBody()); $('#sg_out').innerHTML = sigCard(r.signal, r.adjusted); } catch (e) { $('#sg_out').innerHTML = `<div class="note bad">❌ ${esc(e.message)}</div>`; } };
+ACT.sgPublish = async () => { try { const r = await api('POST', '/api/mother/signals', sgBody()); toast('سیگنال منتشر شد ✓'); renderPage(); } catch (e) { $('#sg_out').innerHTML = `<div class="note bad">❌ ${esc(e.message)}</div>`; } };
+ACT.sgAi = async (b, e) => { e.preventDefault(); const s = sgBody(); const r = await api('POST', '/api/mother/ai/assist', { task: 'signal', input: `${s.type} ${s.symbol} تایم‌فریم ${s.timeframe} ورود ${s.entryPrice || ''} حد ضرر ${s.stopLoss || ''}` }); $('#sg_desc').value = r.text; };
+ACT.genSig2 = async () => { await api('POST', '/api/mother/signals/generate'); toast('سیگنال خودکار منتشر شد'); renderPage(); };
+ACT.sigClose = async (b) => { await api('POST', `/api/mother/signals/${b.dataset.id}/close`); renderPage(); };
+ACT.sigEdit = async (b) => { const s = (S.cache.sigs || []).find((x) => x.id === b.dataset.id); if (!s) return; const ask = (l, v) => { const r = prompt(l, v ?? ''); return r === null ? undefined : r.trim(); }; const sl = ask('حد ضرر جدید:', s.stopLoss); if (sl === undefined) return; const t1 = ask('تارگت ۱:', s.takeProfit1); const t2 = ask('تارگت ۲ (خالی = بدون تغییر):', s.takeProfit2); const t3 = ask('تارگت ۳ (خالی = بدون تغییر):', s.takeProfit3); const body = {}; if (sl) body.stopLoss = +sl; if (t1) body.takeProfit1 = +t1; if (t2) body.takeProfit2 = +t2; if (t3) body.takeProfit3 = +t3; try { await api('PATCH', '/api/mother/signals/' + b.dataset.id, body); toast('حد سود و ضرر ویرایش شد ✓'); renderPage(); } catch (e) { toast(e.message, true); } };
+ACT.sigDel = async (b) => { if (!confirm('سیگنال حذف شود؟')) return; await api('DELETE', '/api/mother/signals/' + b.dataset.id); renderPage(); };
+
+/* ---------------- signal settings: SL / TP control ---------------- */
+PG.sigset = {
+  cfg: true,
+  render() {
+    if (S.target !== 'global') return globalOnlyNote();
+    const st = 'signals.settings.';
+    const syms = (getP('symbols') || []).filter((s) => (getP('signals.allowedPairs') || []).includes(s.symbol));
+    const per = syms.map((s) => `<tr><td><b>${esc(s.symbol)}</b></td>${['slPct', 'tp1R', 'tp2R', 'tp3R'].map((k) => `<td><input type="number" step="any" ${attrs(`${st}perSymbol.${s.symbol}.${k}`, 'num')} value="${esc(getP(`${st}perSymbol.${s.symbol}.${k}`) ?? '')}" placeholder="پیش‌فرض" style="min-width:76px"></td>`).join('')}</tr>`).join('');
+    return `<div class="card"><h3 class="sec">🛡️ حد ضرر (Stop Loss)</h3><div class="grid g3">${F(st + 'slPct', 'حد ضرر پیش‌فرض (٪ از ورود)', 'number', { step: 0.1 })}${F(st + 'slMinPct', 'حداقل فاصله مجاز (٪)', 'number', { step: 0.1 })}${F(st + 'slMaxPct', 'حداکثر فاصله مجاز (٪)', 'number', { step: 0.1 })}</div></div>
+    <div class="card"><h3 class="sec">🎯 حد سود (Take Profit)</h3><div class="grid g4 keep">${F(st + 'tp1R', 'تارگت ۱ (برابر ریسک)', 'number', { step: 0.1 })}${F(st + 'tp2R', 'تارگت ۲ (R)', 'number', { step: 0.1 })}${F(st + 'tp3R', 'تارگت ۳ (R)', 'number', { step: 0.1 })}${F(st + 'tpMinR', 'حداقل ریسک/ریوارد تارگت ۱', 'number', { step: 0.1 })}</div>
+      <p class="mini">مثال: حد ضرر ۱٫۲٪ و تارگت‌های ۱/۲/۳ ⇒ تارگت‌ها ۱٫۲٪ ، ۲٫۴٪ و ۳٫۶٪ بالاتر از ورود.</p></div>
+    <div class="card"><h3 class="sec">⚖️ قوانین اعمال</h3><div class="grid g2">${F(st + 'enforceLimits', 'سخت‌گیرانه: سیگنال دستی خارج از محدوده رد شود (خاموش = خودکار اصلاح شود)', 'switch')}${F(st + 'autoFillLevels', 'اگر حد ضرر/تارگت خالی بود خودکار پر شود', 'switch')}${F(st + 'breakevenAfterTp1', 'بعد از تارگت ۱، حد ضرر به نقطه ورود (سر به سر) برود', 'switch')}
+      ${F(st + 'closeAtTp', 'سیگنال در کدام تارگت بسته شود', 'select', { options: [['TP1', 'تارگت ۱'], ['TP2', 'تارگت ۲'], ['TP3', 'تارگت ۳']] })}${F(st + 'expireHours', 'انقضای خودکار سیگنال (ساعت، ۰=بدون انقضا)', 'number')}${F(st + 'maxRiskPct', 'حداکثر ریسک حساب (٪ نمایشی)', 'number', { step: 0.1 })}${F(st + 'leverageText', 'اهرم نمایشی', 'text')}${F(st + 'allowBuy', 'اجازه سیگنال خرید', 'switch')}${F(st + 'allowSell', 'اجازه سیگنال فروش', 'switch')}</div></div>
+    <div class="card"><h3 class="sec">🤖 موتور سیگنال</h3><div class="grid g3">${F('signals.engineActive', 'موتور سیگنال روشن', 'switch')}${F(st + 'mode', 'حالت', 'select', { options: [['HYBRID', 'ترکیبی (دستی + خودکار)'], ['AUTO', 'فقط خودکار'], ['MANUAL', 'فقط دستی']] })}${F(st + 'autoGenerate', 'تولید خودکار فعال', 'switch')}
+      ${F(st + 'intervalMin', 'فاصله تولید (دقیقه)', 'number')}${F(st + 'maxActive', 'حداکثر سیگنال فعال همزمان', 'number')}${F(st + 'maxPerDay', 'حداکثر سیگنال خودکار در روز', 'number')}
+      ${F(st + 'minScore', 'حداقل امتیاز', 'number')}${F(st + 'vipRatioPct', 'درصد سیگنال‌های VIP', 'number')}${F('signals.minVipWinRate', 'حداقل وین‌ریت سیگنال VIP', 'number')}
+      ${F('signals.vipRequired', 'سیگنال VIP فقط برای مشترکین', 'switch')}${F(st + 'authorName', 'نام منتشرکننده')}</div>
+      <div style="margin-top:8px">${F('signals.allowedPairs', 'نمادهای مجاز برای سیگنال', 'tags', { ph: 'BTCUSD, ETHUSD', ltr: true })}${F(st + 'timeframes', 'تایم‌فریم‌های سیگنال خودکار', 'tags', { ph: '15m, 1h' })}</div></div>
+    <div class="card"><h3 class="sec">تنظیم اختصاصی هر نماد (اختیاری)</h3><p class="mini">خالی = از مقدار پیش‌فرض بالا استفاده می‌شود.</p><div class="tw"><table><tr><th>نماد</th><th>حد ضرر ٪</th><th>تارگت ۱ R</th><th>تارگت ۲ R</th><th>تارگت ۳ R</th></tr>${per}</table></div></div>`;
+  },
+};
+
+/* ---------------- journal ---------------- */
+PG.journal = {
+  cfg: true,
+  async render() {
+    const r = await api('GET', '/api/journal'); const sm = (await api('GET', '/api/journal/summary')).summary;
+    const rows = r.entries.slice(0, 50).map((j) => `<tr><td><b>${esc(j.symbol)}</b> <span class="chip ${j.type === 'BUY' ? 'g' : 'r'}">${j.type}</span> ${j.isAutoLogged ? '<span class="chip b">خودکار</span>' : ''}</td><td class="ltr">${j.entryPrice} → ${j.exitPrice}</td><td><span class="chip ${j.isWin ? 'g' : 'r'}">${j.pnlPercentage}%</span></td><td class="mini">${esc(j.entryTime)}</td><td><button class="btn s d" data-act="jrDel" data-id="${j.id}">حذف</button></td></tr>`).join('');
+    return `<div class="card"><h3 class="sec">تنظیمات ژورنال</h3><div class="grid g3">${F('journalUi.enabled', 'نمایش تب ژورنال', 'switch')}${F('journalUi.autoJournal', 'ثبت خودکار نتیجه سیگنال‌ها', 'switch')}${F('journalUi.allowManualEntries', 'اجازه ثبت دستی توسط کاربران', 'switch')}</div></div>
+    <div class="grid g4 keep">${stat('نرخ برد', fa(sm.winRate) + '٪')}${stat('برد/باخت', `${fa(sm.winCount)} / ${fa(sm.lossCount)}`)}${stat('برایند هفتگی', fa(sm.weeklyPnlPercentage) + '٪')}${stat('برایند ماهانه', fa(sm.monthlyPnlPercentage) + '٪')}</div>
+    <div class="card" style="margin-top:12px"><h3 class="sec">آخرین ثبت‌ها</h3><div class="tw"><table><tr><th>معامله</th><th>ورود → خروج</th><th>نتیجه</th><th>تاریخ</th><th></th></tr>${rows || '<tr><td colspan="5" class="empty">خالی</td></tr>'}</table></div></div>`;
+  },
+};
+ACT.jrDel = async (b) => { await api('DELETE', '/api/mother/journal/' + b.dataset.id); renderPage(); };
+
+/* ---------------- AI (Claude) ---------------- */
+PG.ai = {
+  cfg: true,
+  async render() {
+    const [sec, st] = await Promise.all([api('GET', '/api/mother/secrets'), api('GET', '/api/mother/ai/stats')]);
+    const k = sec.secrets;
+    return `<div class="note info">دستیار «${esc(getP('ai.name'))}» پاسخ‌هایش را از <b>Claude</b> (Anthropic) می‌گیرد. سرور قبل از هر پاسخ، قیمت‌های زنده، سیگنال‌های فعال، اخبار و «دانش اختصاصی» شما را به Claude می‌دهد تا جواب دقیق و مخصوص پلتفرم شما باشد.</div>
+    <div class="card"><h3 class="sec">🔑 اتصال به Claude</h3><div class="grid g2"><div class="f"><label>کلید API (Anthropic) ${k.hasAnthropic ? '<span class="chip g">ثبت شده</span>' : '<span class="chip r">ثبت نشده</span>'}</label><input type="password" class="ltr" id="ak" placeholder="${esc(k.anthropicKey || 'sk-ant-...')}"><span class="hint">از console.anthropic.com بگیرید. کلید فقط روی سرور شما ذخیره می‌شود و هرگز به اپ‌ها ارسال نمی‌شود.</span></div>
+      <div class="f"><label>مدل Claude</label>${F('ai.model', '', 'text', { ltr: true, list: 'mdl' }).replace('<label></label>', '')}<datalist id="mdl">${MODELS.map((m) => `<option value="${m}">`).join('')}</datalist><span class="hint">Haiku سریع و ارزان، Sonnet متعادل، Opus/Fable قوی‌تر و گران‌تر.</span></div></div>
+      <div class="grid g2" style="margin-top:8px"><div class="f"><label>کلید OpenAI (ChatGPT + صدا) ${k.hasOpenai ? '<span class="chip g">ثبت شده</span>' : '<span class="chip r">ثبت نشده</span>'}</label><input type="password" class="ltr" id="ok" placeholder="${esc(k.openaiKey || 'sk-...')}"><span class="hint">با ثبت این کلید، گفتگو و صدا (ویس) از ChatGPT انجام می‌شود.</span></div><div class="f"><label>کلید وب‌هوک اندیکاتور ${k.hasWebhookSecret ? '<span class="chip g">ثبت شده</span>' : '<span class="chip r">ثبت نشده</span>'}</label><input type="password" class="ltr" id="wk" placeholder="یک رمز دلخواه"><span class="hint">آدرس: /api/signals/ingest</span></div></div>
+      <div class="row" style="margin-top:8px"><button class="btn p" data-act="saveKey">ذخیره کلید</button><button class="btn" data-act="aiTest">🧪 تست اتصال Claude</button></div><div id="ai_out" style="margin-top:8px"></div></div>
+    <div class="card"><h3 class="sec">شخصیت و رفتار</h3><div class="grid g2">${F('ai.enabled', 'هوش مصنوعی روشن باشد', 'switch')}${F('ai.name', 'نام دستیار')}${F('ai.maxTokens', 'حداکثر طول پاسخ (توکن)', 'number')}${F('ai.temperature', 'خلاقیت (۰ تا ۱)', 'number', { step: 0.1, min: 0, max: 1 })}</div>
+      <div style="margin-top:8px">${F('ai.welcome', 'پیام خوش‌آمدگویی', 'textarea', { rows: 2 })}${F('ai.systemPrompt', 'دستور سیستمی (شخصیت دستیار)', 'textarea', { rows: 7, hint: 'می‌توانید از {{name}} ، {{brand}} ، {{strategy}} ، {{indicator}} استفاده کنید.' })}${F('ai.quickPrompts', 'پیشنهادهای سریع زیر چت', 'tags', { hint: 'با ویرگول جدا کنید' })}${F('ai.blockedTopics', 'موضوعات ممنوع برای پاسخ', 'text')}${F('ai.fallbackReply', 'پیام هنگام خطا/خاموشی')}</div></div>
+    <div class="card"><h3 class="sec">داده‌هایی که به Claude داده می‌شود</h3><div class="grid g4 keep">${F('ai.includeLivePrices', 'قیمت‌های زنده', 'switch')}${F('ai.includeSignals', 'سیگنال‌های فعال', 'switch')}${F('ai.includeNews', 'اخبار و رویدادها', 'switch')}${F('ai.includeJournal', 'برایند ژورنال', 'switch')}</div></div>
+    <div class="card"><h3 class="sec">📚 دانش اختصاصی (آموزش دستی به دستیار)</h3><p class="mini">قوانین، آموزش‌ها، پرسش‌های متداول، توضیح اشتراک‌ها و ... را اینجا بنویسید؛ Claude هنگام پاسخ از آن‌ها استفاده می‌کند.</p>
+      ${L('ai.knowledge', 'سند', [{ k: 'title', label: 'عنوان' }, { k: 'enabled', label: 'فعال', type: 'switch' }, { k: 'content', label: 'متن', type: 'textarea', full: true, opts: { rows: 5 } }], { id: '__ID__', title: 'سند جدید', content: '', enabled: true }, { itemTitle: (d) => d.title || 'سند' })}</div>
+    <div class="card"><h3 class="sec">دسترسی و سقف استفاده</h3><div class="grid g3">${F('ai.requireLogin', 'فقط کاربران واردشده', 'switch')}${F('ai.vipOnly', 'فقط کاربران VIP', 'switch')}<div></div>${F('ai.dailyLimitFree', 'سقف پیام روزانه — کاربر رایگان (۰=نامحدود)', 'number')}${F('ai.dailyLimitVip', 'سقف پیام روزانه — کاربر VIP', 'number')}</div>
+      <p class="mini" style="margin-top:6px">مصرف تا امروز: ${fa(st.stats.requests)} پیام · ${fa(st.stats.inputTokens)} توکن ورودی · ${fa(st.stats.outputTokens)} توکن خروجی · ${fa(st.stats.errors)} خطا${st.stats.lastError ? `<br><span style="color:#fb7185">آخرین خطا: ${esc(st.stats.lastError)}</span>` : ''}</p></div>
+    <div class="card"><h3 class="sec">🧪 تست چت (با تنظیمات ذخیره‌شده فعلی)</h3><div class="row"><input type="text" id="ai_q" data-local="1" placeholder="یک سوال بپرسید…" style="flex:1"><button class="btn p" data-act="aiTest2">ارسال</button></div><div id="ai_a" class="note ok" style="display:none;margin-top:8px;white-space:pre-wrap"></div></div>`;
+  },
+};
+ACT.saveKey = async () => { const v = $('#ak').value.trim(), o = $('#ok').value.trim(), w = $('#wk').value.trim(); if (!v && !o && !w) return toast('حداقل یک کلید را وارد کنید', true); await api('POST', '/api/mother/secrets', { anthropicKey: v, openaiKey: o, webhookSecret: w }); toast('کلید ذخیره شد ✓'); renderPage(); };
+ACT.aiTest = async () => { const o = $('#ai_out'); o.innerHTML = '<span class="mini">در حال تست…</span>'; try { const r = await api('POST', '/api/mother/ai/test', { message: 'سلام! فقط بگو آماده‌ای.', model: getP('ai.model') }, { timeout: 60000 }); o.innerHTML = `<div class="note ok">✅ Claude پاسخ داد (${esc(r.model)}): ${esc(r.reply)}</div>`; } catch (e) { o.innerHTML = `<div class="note bad">❌ ${esc(e.message)}</div>`; } };
+ACT.aiTest2 = async () => { const q = $('#ai_q').value.trim(); if (!q) return; const a = $('#ai_a'); a.style.display = 'block'; a.textContent = 'در حال پاسخ…'; try { const r = await api('POST', '/api/mother/ai/test', { message: q }, { timeout: 60000 }); a.textContent = r.reply; } catch (e) { a.textContent = '❌ ' + e.message; } };
+
+/* ---------------- plans / wallet / Zarinpal ---------------- */
+PG.plans = {
+  cfg: true,
+  async render() {
+    const [sec, pay] = await Promise.all([api('GET', '/api/mother/secrets'), api('GET', '/api/mother/payments')]); const k = sec.secrets; const ps = pay.stats;
+    return `<div class="grid g4 keep">${stat('کل درآمد', fa(ps.totalPaid), 'تومان')}${stat('۳۰ روز اخیر', fa(ps.last30d), 'تومان')}${stat('تعداد پرداخت موفق', fa(ps.count))}${stat('موجودی کیف پول کاربران', fa(ps.walletLiability), 'تومان')}</div>
+    <div class="card" style="margin-top:12px"><h3 class="sec">💳 درگاه زرین‌پال</h3>
+      <div class="grid g2"><div class="f"><label>مرچنت‌کد (Merchant ID) ${k.zarinpal.merchantId ? '<span class="chip g">ثبت شده</span>' : '<span class="chip r">ثبت نشده</span>'}</label><input type="text" class="ltr" id="zp_m" value="${esc(k.zarinpal.merchantId)}" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"><span class="hint">از پنل زرین‌پال ← درگاه پرداخت ← مرچنت‌کد</span></div>
+        <label class="sw" style="align-self:end"><span>حالت تست (Sandbox)</span><input type="checkbox" id="zp_s" ${k.zarinpal.sandbox ? 'checked' : ''}><i></i></label></div>
+      <div class="note info" style="margin-top:8px">آدرس بازگشت (Callback) به‌صورت خودکار از آدرس سرور ساخته می‌شود: <code>${esc(k.callbackUrl)}</code><br>دامنه سرور شما باید در پنل زرین‌پال تأیید شده باشد (و برای پرداخت واقعی HTTPS داشته باشد).</div>
+      <div class="row"><button class="btn p" data-act="saveZp">ذخیره تنظیمات زرین‌پال</button></div></div>
+    <div class="card"><h3 class="sec">تنظیمات فروش</h3><div class="grid g3">${F('subscription.enabled', 'فروش اشتراک فعال', 'switch')}${F('subscription.zarinpalEnabled', 'پرداخت با زرین‌پال', 'switch')}${F('subscription.walletEnabled', 'کیف پول فعال', 'switch')}${F('subscription.allowWalletPayment', 'خرید اشتراک از موجودی کیف پول', 'switch')}
+      ${F('subscription.minTopup', 'حداقل شارژ (تومان)', 'number')}${F('subscription.maxTopup', 'حداکثر شارژ (تومان)', 'number')}</div>
+      <div style="margin-top:8px">${F('subscription.topupPresets', 'مبالغ پیشنهادی شارژ (تومان)', 'numtags', { hint: 'با فاصله یا ویرگول جدا کنید' })}${F('subscription.paymentDescription', 'توضیح پرداخت (در صفحه زرین‌پال)')}${F('subscription.manualPaymentText', 'متن پرداخت دستی/کارت‌به‌کارت (اختیاری، زیر دکمه‌ها نمایش داده می‌شود)', 'textarea', { rows: 2 })}</div></div>
+    <div class="card"><h3 class="sec">پلن‌های اشتراک (قیمت به تومان)</h3>${L('subscription.plans', 'پلن', [
+      { k: 'title', label: 'عنوان پلن', full: true }, { k: 'days', label: 'مدت (روز)', type: 'number' }, { k: 'price', label: 'قیمت (تومان)', type: 'number' }, { k: 'oldPrice', label: 'قیمت قبل از تخفیف (۰=ندارد)', type: 'number' },
+      { k: 'bonusTokens', label: 'توکن هدیه', type: 'number' }, { k: 'badge', label: 'برچسب (مثلاً محبوب‌ترین)' }, { k: 'features', label: 'ویژگی‌ها', type: 'tags', full: true, opts: { hint: 'با ویرگول جدا کنید' } },
+      { k: 'highlight', label: 'پیشنهاد ویژه (برجسته)', type: 'switch' }, { k: 'active', label: 'فعال برای فروش', type: 'switch' }],
+      { id: '__ID__', title: 'پلن جدید', days: 30, price: 500000, oldPrice: 0, badge: '', highlight: false, active: true, bonusTokens: 0, features: [] }, { itemTitle: (p) => `${p.title} — ${fa(p.price)} تومان`, cols: 'g3' })}</div>
+    <div class="card"><h3 class="sec">پرداخت‌های اخیر</h3>${payTable(pay.payments.slice(0, 40))}</div>`;
+  },
+};
+ACT.saveZp = async () => { await api('POST', '/api/mother/secrets', { zarinpal: { merchantId: $('#zp_m').value.trim(), sandbox: $('#zp_s').checked } }); toast('تنظیمات زرین‌پال ذخیره شد ✓'); renderPage(); };
+
+/* ---------------- users & wallet ---------------- */
+PG.users = {
+  async render() {
+    const q = S.cache.uq || '';
+    const r = await api('GET', '/api/mother/users?q=' + encodeURIComponent(q));
+    const rows = r.users.map((u) => `<tr><td><b>${esc(u.name)}</b> ${u.role === 'ADMIN' ? '<span class="chip y">ادمین</span>' : ''} ${u.banned ? '<span class="chip r">مسدود</span>' : ''}<div class="mini ltr">${esc(u.phone)}</div></td><td>${u.isVip ? `<span class="chip g">VIP تا ${esc(u.vipExpiry)}</span>` : '<span class="chip">رایگان</span>'}</td><td>${fa(u.balance)}</td><td>${fa(u.frtkTokens)}</td><td class="mini">${when(u.createdAt)}</td>
+      <td><div class="row"><button class="btn s p" data-act="uBal" data-id="${u.id}">💰 کیف پول</button><button class="btn s a" data-act="uVip" data-id="${u.id}">👑 VIP</button><button class="btn s" data-act="uTok" data-id="${u.id}">🪙</button><button class="btn s" data-act="uSpin" data-id="${u.id}" title="بلیط گردونه">🎡</button><button class="btn s p" data-act="uFree" data-id="${u.id}" title="فعال‌سازی اشتراک بدون پرداخت">🎁</button><button class="btn s p" data-act="uPaid" data-id="${u.id}" title="تأیید خرید اشتراک (پاداش دعوت اعمال می‌شود)">✅</button><button class="btn s" data-act="uPass" data-id="${u.id}">🔑</button><button class="btn s ${u.banned ? 'p' : 'd'}" data-act="uBan" data-id="${u.id}" data-b="${u.banned ? 0 : 1}">${u.banned ? 'رفع مسدودی' : 'مسدود'}</button></div></td></tr>`).join('');
+    return `<div class="grid g3 keep">${stat('کل کاربران', fa(r.total))}${stat('کاربران VIP', fa(r.vipCount))}${stat('نمایش', fa(r.users.length))}</div>
+      <div class="card" style="margin-top:12px"><div class="row" style="margin-bottom:8px"><input type="search" id="uq" data-local="1" placeholder="جستجوی نام یا شماره…" value="${esc(q)}" style="flex:1"><button class="btn" data-act="uSearch">جستجو</button></div><div class="tw"><table><tr><th>کاربر</th><th>اشتراک</th><th>کیف پول (تومان)</th><th>توکن</th><th>عضویت</th><th></th></tr>${rows || '<tr><td colspan="6" class="empty">کاربری یافت نشد</td></tr>'}</table></div></div>`;
+  },
+};
+const uAct = async (id, body, msg) => { await api('POST', '/api/mother/users/' + id, body); toast(msg || 'انجام شد ✓'); renderPage(); };
+ACT.uSearch = async () => { S.cache.uq = $('#uq').value.trim(); renderPage(); };
+ACT.uBal = async (b) => { const v = prompt('مبلغ تغییر موجودی (تومان). عدد منفی = کسر:'); if (!v) return; await uAct(b.dataset.id, { balanceDelta: +v, note: 'تغییر دستی توسط مدیر' }); };
+ACT.uVip = async (b) => { const v = prompt('تعداد روز VIP برای افزودن (منفی = کسر):', '30'); if (!v) return; await uAct(b.dataset.id, { addVipDays: +v }); };
+ACT.uSpin = async (b) => { const v = prompt('تعداد بلیط گردونه برای افزودن:', '1'); if (!v) return; await uAct(b.dataset.id, { addSpins: +v }, 'بلیط گردونه اضافه شد ✓'); };
+ACT.uFree = async (b) => { const v = prompt('فعال‌سازی اشتراک VIP بدون پرداخت — تعداد روز:', '30'); if (!v) return; await uAct(b.dataset.id, { addVipDays: +v }, 'اشتراک رایگان فعال شد ✓'); };
+ACT.uPaid = async (b) => { const v = prompt('تأیید خرید اشتراک (پرداخت دستی/کارت‌به‌کارت) — تعداد روز اشتراک:', '30'); if (!v || !(+v > 0)) return; await uAct(b.dataset.id, { activatePlanId: 'MANUAL', days: +v, countAsPurchase: true }, 'اشتراک فعال شد؛ اگر کاربر دعوت‌شده بود، بلیط‌های دعوت اعمال شد ✓'); };
+ACT.uTok = async (b) => { const v = prompt('تعداد توکن FRTK برای افزودن (منفی = کسر):', '100'); if (!v) return; await uAct(b.dataset.id, { addTokens: +v }); };
+ACT.uPass = async (b) => { const v = prompt('رمز عبور جدید (حداقل ۶ کاراکتر):'); if (!v) return; await uAct(b.dataset.id, { newPassword: v }, 'رمز تغییر کرد'); };
+ACT.uBan = async (b) => uAct(b.dataset.id, { banned: b.dataset.b === '1' });
+
+/* ---------------- economy ---------------- */
+PG.economy = {
+  cfg: true,
+  render() {
+    return `<div class="card"><h3 class="sec">توکن فرتاک و دعوت دوستان</h3><div class="grid g3">${F('economy.tokenName', 'نام توکن')}${F('economy.signupBonusTokens', 'پاداش ثبت‌نام', 'number')}${F('economy.referralBonusTokens', 'پاداش دعوت‌کننده', 'number')}${F('economy.referralInviteeBonus', 'پاداش دعوت‌شده', 'number')}</div></div>
+    <div class="card"><h3 class="sec">تخفیف خرید اشتراک با توکن</h3><div class="grid g3">${F('economy.tokenDiscount.enabled', 'تخفیف توکن فعال', 'switch')}${F('economy.tokenDiscount.tokensPerStep', 'تعداد توکن در هر پله', 'number', { min: 1, step: 1 })}${F('economy.tokenDiscount.percentPerStep', 'درصد تخفیف هر پله', 'number', { min: 0, step: 0.1 })}${F('economy.tokenDiscount.maxPercent', 'سقف تخفیف (٪)', 'number', { min: 0, max: 100, step: 1 })}</div><p class="mini" style="line-height:2">پیش‌فرض: هر ۱۰ توکن = ۱٪ تخفیف، حداکثر ۵۰٪. کاربر در اپ عمومی (کیف پول و صفحهٔ اشتراک) مبلغ تخفیف را به تومان روی هر پلن می‌بیند.</p></div>
+    <div class="card"><h3 class="sec">گردونه شانس</h3><div class="grid g3">${F('economy.wheelEnabled', 'گردونه فعال', 'switch')}${F('economy.dailyFreeSpins', 'چرخش رایگان روزانه', 'number')}</div>
+      <div style="margin-top:10px">${L('economy.wheelPrizes', 'جایزه', [{ k: 'label', label: 'عنوان جایزه', full: true }, { k: 'icon', label: 'آیکن (ایموجی)' }, { k: 'type', label: 'نوع', type: 'select', opts: { options: [['TOKEN', 'توکن'], ['FREE_SPIN', 'چرخش رایگان'], ['VIP_DAYS', 'روز VIP'], ['DISCOUNT', 'کد تخفیف'], ['BONUS', 'بونوس']] } }, { k: 'value', label: 'مقدار', type: 'number' }, { k: 'probability', label: 'احتمال (وزن)', type: 'number' }, { k: 'color', label: 'رنگ برش', type: 'color' }, { k: 'enabled', label: 'فعال', type: 'switch' }], { id: '__ID__', label: 'جایزه جدید', icon: '🎁', type: 'TOKEN', value: 10, probability: 5, color: '#10B981', enabled: true }, { itemTitle: (p) => p.label, cols: 'g3' })}</div></div>`;
+  },
+};
+
+/* ---------------- security & backup ---------------- */
+PG.security = {
+  async render() {
+    const sv=(await api('GET','/api/mother/server')).server; const sms=(await api('GET','/api/mother/secrets')).secrets;
+    return `<div class="card"><h3 class="sec">🔐 امنیت حساب مدیر</h3><div class="grid g2"><div class="f"><label>رمز فعلی</label><input id="pw_current" type="password" class="ltr" autocomplete="current-password"></div><div class="f"><label>رمز جدید (حداقل ۱۰ نویسه)</label><input id="pw_new" type="password" class="ltr" autocomplete="new-password"></div><div class="f"><label>تکرار رمز جدید</label><input id="pw_confirm" type="password" class="ltr" autocomplete="new-password"></div></div><div class="row"><button class="btn p" data-act="changePassword">تغییر رمز عبور</button><button class="btn" data-act="rotateRecovery">ساخت کد بازیابی جدید</button></div><p class="mini" style="line-height:2">کد بازیابی فقط یک بار نمایش داده می‌شود. آن را در مدیر رمز عبور یا مکانی امن ذخیره کن؛ بازیابی رمز مدیر فقط با همین کد انجام می‌شود (پیامک فقط برای کاربران عمومی است).</p><div id="security_code" class="note ok" style="display:none;direction:ltr;overflow-wrap:anywhere"></div></div>
+    <div class="card"><h3 class="sec">📱 پیامک بازیابی رمز کاربران (کاوه‌نگار)</h3><div class="grid g2"><div class="f"><label>کلید API کاوه‌نگار ${sms.hasSms ? '<span class="chip g">فعال</span>' : '<span class="chip r">غیرفعال</span>'}</label><input id="sms_key" type="password" class="ltr" autocomplete="off" placeholder="${esc((sms.sms && sms.sms.apiKey) || 'API Key')}"></div><div class="f"><label>نام قالب تأیید (Template)</label><input id="sms_tpl" class="ltr" autocomplete="off" value="${esc((sms.sms && sms.sms.template) || '')}" placeholder="fartak-reset"></div></div><div class="row"><button class="btn p" data-act="saveSms">ذخیره تنظیمات پیامک</button></div><p class="mini" style="line-height:2">در پنل کاوه‌نگار یک قالب «verify/lookup» با یک توکن (%token) بسازید و نامش را اینجا بنویسید. تا وقتی هر دو مقدار ذخیره نشوند، گزینهٔ «فراموشی رمز» اپ عمومی پیام «با پشتیبانی تماس بگیرید» نشان می‌دهد.</p></div>
+    <div class="card"><h3 class="sec">💾 پشتیبان تنظیمات</h3><div class="row"><button class="btn p" data-act="expCfg">⬇ دانلود پشتیبان تنظیمات</button><button class="btn" data-act="impCfg">⬆ بازیابی تنظیمات</button></div><p class="mini">فایل پشتیبان شامل تنظیمات و داده‌های قابل انتقال Worker است. آن را در مکانی امن نگه دار.</p></div>
+    <div class="card"><h3 class="sec">حفاظت داده‌ها</h3><div class="mini" style="line-height:2">رمز عبور با هش PBKDF2 در D1 ذخیره می‌شود. نشست‌ها زمان انقضا دارند و بعد از تغییر رمز ابطال می‌شوند. کلید سرویس‌های خارجی را فقط در تنظیمات امن قرار بده و در APK یا فایل عمومی قرار نده.</div></div>`;
+  },
+};
+ACT.saveSms = async () => { await api('POST', '/api/mother/secrets', { sms: { apiKey: $('#sms_key').value.trim(), template: $('#sms_tpl').value.trim() } }); toast('تنظیمات پیامک ذخیره شد ✓'); renderPage(); };
+ACT.changePassword = async () => {
+  const currentPassword=$('#pw_current').value,newPassword=$('#pw_new').value,confirm=$('#pw_confirm').value;
+  if(newPassword.length<10||newPassword!==confirm)throw new Error('رمز جدید باید حداقل ۱۰ نویسه باشد و تکرار آن یکسان باشد.');
+  await api('POST','/api/mother/auth/password',{currentPassword,newPassword}); SRV.now.key=''; SRV.save(); S.auth=false; toast('رمز تغییر کرد؛ دوباره وارد شوید.'); loginScreen();
+};
+ACT.rotateRecovery = async () => {
+  const password=prompt('برای تولید کد بازیابی جدید، رمز فعلی مدیر را وارد کن:'); if(!password)return;
+  const r=await api('POST','/api/mother/auth/rotate-recovery',{password}); const el=$('#security_code'); el.style.display='block'; el.textContent='کد بازیابی جدید (فقط این بار): '+r.recoveryCode; toast('کد بازیابی جدید ساخته شد؛ همین حالا ذخیره‌اش کن.');
+};
+ACT.expCfg = async () => { const r=await api('GET','/api/mother/server/export');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(r,null,2)],{type:'application/json'}));a.download='fartak-config-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href); };
+ACT.impCfg = async () => { const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=async()=>{try{const t=JSON.parse(await i.files[0].text());await api('POST','/api/mother/server/import-config',t);await loadConfig();toast('تنظیمات بازیابی شد ✓');renderPage();}catch(e){toast('فایل نامعتبر: '+e.message,true);}};i.click();};
+
+/* ---------------- start ---------------- */
+boot();
+</script></body></html>
